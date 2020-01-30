@@ -44,6 +44,40 @@
     </nav>
     <!-- END nav -->
     <?= $content ?>
+    <!-- END content -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-12">
+                <div class="col-md-12 text-center">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="logo"><a href="#">Follow<span>Me</span>.</a></h2>
+                        <ul class="ftco-footer-social list-unstyled">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved by Jean Forteroche
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- END footer -->
+
     <script src="public/js/jquery.min.js"></script>
     <script src="public/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="public/js/popper.min.js"></script>

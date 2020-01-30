@@ -10,7 +10,7 @@ if (isset($_GET['action'])) {
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');
         }
-    } elseif ($_GET['action'] == 'addcomment') {
+    } elseif ($_GET['action'] == 'addComment') {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (!empty($_POST['author']) && !empty($_POST['comment'])) {
                 $comment = new CommentController();
@@ -21,15 +21,16 @@ if (isset($_GET['action'])) {
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');
         }
-    } elseif ($_GET['action'] == 'onecomment') {
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $comment = new CommentController();
-            $comment->oneComment($_GET['post'], $_GET['id']);
-        }
-    } elseif ($_GET['action'] == 'update') {
-        $comment = new CommentController();
-        $comment->updateActionComment($_POST['author'], $_POST['comment'], $_POST['postId'], $_POST['id']);
     }
+    // elseif ($_GET['action'] == 'onecomment') {
+    //     if (isset($_GET['id']) && $_GET['id'] > 0) {
+    //         $comment = new CommentController();
+    //         $comment->oneComment($_GET['post'], $_GET['id']);
+    //     }
+    // } elseif ($_GET['action'] == 'update') {
+    //     $comment = new CommentController();
+    //     $comment->updateActionComment($_POST['author'], $_POST['comment'], $_POST['postId'], $_POST['id']);
+    // }
 } else {
     $post = new PostController();
     $post->listPosts();
