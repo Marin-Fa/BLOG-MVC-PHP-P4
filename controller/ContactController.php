@@ -3,27 +3,37 @@ require_once 'model/ContactManager.php';
 
 class ContactController
 {
-    public $msg = "";
+    public $msg = "Contact Me";
 
     public function showContactPage()
     {
-        $this->msg = "Contact Me";
         require 'view/contactView.php';
     }
     public function addMessage($name, $email, $message)
     {
         $contactManager = new ContactManager();
-        if (isset($_POST['submit'])) {
-            $messageInserted = $contactManager->postMessage($name, $email, $message);
-            $this->msg = "Thank You !";
-        }
+        $messageInserted = $contactManager->postMessage($name, $email, $message);
+        $this->msg = "Thank You !";
 
         if ($messageInserted === false) {
-            throw new Exception('Impossible d\'ajouter le commentaire !');
+            echo ('Impossible d\'ajouter le commentaire !');
         } else {
-            header('Location: index.php?action=showContactPage');
+            require 'view/contactView.php';
         }
+        // if (isset($_POST['submit'])) {
+        //     $messageInserted = $contactManager->postMessage($name, $email, $message);
+        //     $this->msg = "Thank You !";
+        //  if ($messageInserted === false) {
+        //     throw new Exception('Impossible d\'ajouter le commentaire !');
+        // } else {
+        //     require 'view/contactView.php';
+        // }
+        //  require 'view/contactView.php';
+        // }
     }
+
+
+
     // public function readMessage()
     // {
     //     $contactManager = new ContactManager();

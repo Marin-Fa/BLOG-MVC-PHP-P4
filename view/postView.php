@@ -11,7 +11,6 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="text">
-                            <!-- <p>Far far away, behind the world mountains, far from the industrial wolrd, lives the peacefull place in the world.</p> -->
                             <div class="mouse">
                                 <a href="#" class="mouse-icon">
                                     <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>

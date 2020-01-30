@@ -37,7 +37,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="index.php?action=showContactPage" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="" class="nav-link">Login</a></li>
+                    <li class="nav-item"><a href="index.php?action=showRegisterPage" class="nav-link">Login</a></li>
                 </ul>
             </div>
         </div>
@@ -85,8 +85,8 @@
     <script src="public/js/aos.js"></script>
     <script src="public/js/jquery.animateNumber.min.js"></script>
     <script src="public/js/scrollax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="public/js/google-map.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+    <!-- <script src="public/js/google-map.js"></script> -->
     <script src="public/js/main.js"></script>
     <script src="public/js/contact.js"></script>
 </body>

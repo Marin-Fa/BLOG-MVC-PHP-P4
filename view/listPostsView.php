@@ -6,12 +6,15 @@
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
             <div class="col-md-12 ftco-animate">
-                <!-- <h2 class="subheading">Hello! Welcome to</h2> -->
-                <h1 class="mb-4 mb-md-0">Jean Forteroche</h1>
+                <?php if ($this->msg) : ?>
+                    <h1 id="contact_header" class="mb-4 mb-md-0"><?= $this->msg ?></h1>
+                <?php endif ?>
                 <div class="row">
                     <div class="col-md-7">
                         <div class="text">
-                            <p>Far far away, behind the mountains, far from the industrial wolrd, lives the peacefull place in the world.</p>
+                            <?php if ($this->p) : ?>
+                                <p><?= $this->p ?></p>
+                            <?php endif ?>
                             <div class="mouse">
                                 <a href="" class="mouse-icon">
                                     <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
