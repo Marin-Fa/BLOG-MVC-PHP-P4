@@ -1,6 +1,8 @@
 <?php
 require 'controller/PostController.php';
 require 'controller/CommentController.php';
+require 'controller/ContactController.php';
+require 'controller/BackendController.php';
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'post') {
@@ -21,6 +23,18 @@ if (isset($_GET['action'])) {
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');
         }
+    } elseif ($_GET['action'] == 'showContactPage') {
+        $message = new ContactController();
+        $message->showContactPage();
+    } elseif ($_GET['action'] == 'addMessage') {
+        // if (isset($_GET['id']) && $_GET['id'] > 0 || null) {
+        if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['message'])) {
+            $message = new ContactController();
+            $message->addMessage($_POST['name'], $_POST['email'], $_POST['message']);
+        } else {
+            echo 'Fill in the form please';
+        }
+        // }
     }
     // elseif ($_GET['action'] == 'onecomment') {
     //     if (isset($_GET['id']) && $_GET['id'] > 0) {

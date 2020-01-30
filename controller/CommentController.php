@@ -4,7 +4,6 @@ class CommentController
 {
     public function addComment($postId, $author, $comment)
     {
-        var_dump('test');
         $commentManager = new CommentManager();
         $affectedLines = $commentManager->postComment($postId, $author, $comment);
 

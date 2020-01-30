@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="index.php?action=showContactPage" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="" class="nav-link">Login</a></li>
                 </ul>
             </div>
@@ -64,14 +64,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>
+                    <p>Copyright &copy;<script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved by Jean Forteroche
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
+                        </script> All rights reserved by Jean Forteroche</p>
                 </div>
             </div>
         </div>
@@ -93,6 +88,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="public/js/google-map.js"></script>
     <script src="public/js/main.js"></script>
+    <script src="public/js/contact.js"></script>
 </body>
 
 </html>
