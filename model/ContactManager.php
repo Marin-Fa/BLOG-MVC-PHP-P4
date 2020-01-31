@@ -1,6 +1,9 @@
 <?php
-require_once 'model/Manager.php';
-require_once 'model/Contact.php';
+
+namespace Blog\model;
+
+use Blog\model\Contact;
+
 class ContactManager extends Manager
 {
     public function postMessage($name, $email, $message)

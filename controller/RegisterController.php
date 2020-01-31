@@ -1,5 +1,8 @@
 <?php
-require_once 'model/RegisterManager.php';
+
+namespace Blog\controller;
+
+use Blog\model\RegisterManager;
 
 class RegisterController
 {

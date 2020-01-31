@@ -1,4 +1,9 @@
 <?php
+
+namespace Blog\model;
+
+use DateTime;
+
 class Contact
 {
 

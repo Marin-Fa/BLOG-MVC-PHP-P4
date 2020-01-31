@@ -1,8 +1,15 @@
 <?php
-require 'controller/PostController.php';
-require 'controller/CommentController.php';
-require 'controller/ContactController.php';
-require 'controller/RegisterController.php';
+
+require_once 'Autoloader.php';
+
+use Blog\Autoloader;
+use Blog\controller\PostController;
+use Blog\controller\CommentController;
+use Blog\controller\ContactController;
+use Blog\controller\RegisterController;
+
+Autoloader::register();
+session_start();
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'post') {

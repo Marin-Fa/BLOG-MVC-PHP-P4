@@ -1,6 +1,11 @@
 <?php
-require_once 'model/Manager.php';
-require_once 'model/User.php';
+
+namespace Blog\model;
+
+use Blog\model\User;
+
+use PDO;
+
 class RegisterManager extends Manager
 {
     public function pushUserInfo($username, $password)

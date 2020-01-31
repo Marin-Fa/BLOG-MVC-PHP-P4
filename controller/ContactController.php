@@ -1,5 +1,8 @@
 <?php
-require_once 'model/ContactManager.php';
+
+namespace Blog\controller;
+
+use Blog\model\ContactManager;
 
 class ContactController
 {

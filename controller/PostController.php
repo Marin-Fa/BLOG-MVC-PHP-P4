@@ -1,6 +1,12 @@
 <?php
-require_once 'model/PostManager.php';
-require_once 'model/RegisterManager.php';
+
+namespace Blog\controller;
+
+use Blog\model\PostManager;
+use Blog\model\CommentManager;
+
+// require_once 'model/RegisterManager.php';
+
 class PostController
 {
     public $msg = "";

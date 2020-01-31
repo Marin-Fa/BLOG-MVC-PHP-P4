@@ -1,6 +1,10 @@
 <?php
-require_once 'model/Manager.php';
-require_once 'model/Comment.php';
+
+namespace Blog\model;
+
+// require_once 'model/Manager.php';
+use Blog\model\Comment;
+
 class CommentManager extends Manager
 {
     public function getComments($postId)

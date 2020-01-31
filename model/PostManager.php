@@ -1,6 +1,9 @@
 <?php
-require_once 'model/Manager.php';
-require_once 'model/Post.php';
+
+namespace Blog\model;
+
+use Blog\model\Post;
+
 class PostManager extends Manager
 {
     // SELECT all posts
