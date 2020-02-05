@@ -14,7 +14,7 @@ class RegisterController
     public $username_err  =  "";
     public $password_err = "";
     public $confirm_password_err = "";
-    public $a = "";
+    public $id = "";
 
     public function showRegisterPage()
     {
@@ -23,23 +23,36 @@ class RegisterController
     }
     public function addNewUser($username, $password)
     {
-        $registerManager = new RegisterManager();
-        if (empty(trim($_POST["username"])) || empty(trim($_POST["password"])) || empty(trim($_POST["confirm_password"]))) {
-            $this->msg = "...Login";
-            // echo 'nope';
-            $this->username_err = "Please enter a username.";
-            $this->password_err = "Please enter a password.";
-            $this->confirm_password_err = "Please confirm password.";
-            $this->msg = "Register";
-            require 'view/registerView.php';
-            return;
-        } else {
-            if (($user = $registerManager->matchUser($this->username) == 1) && strlen(trim($_POST["password"])) < 6 && trim($_POST["confirm_password"])) {
+        $user = $_POST['username'];
+        // Processing form data when form is submitted
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $registerManager = new RegisterManager();
+            if (empty(trim($_POST["username"])) || empty(trim($_POST["password"])) || empty(trim($_POST["confirm_password"]))) {
+                // echo 'nope';
+                $this->username_err = "Please enter a username.";
+                $this->password_err = "Please enter a password.";
+                $this->confirm_password_err = "Please confirm password.";
+                $this->msg = "Register";
+                require 'view/registerView.php';
+                return;
+            }
+            if ($user = $registerManager->matchUser($this->username) == true) {
+                $this->msg = "Register";
                 $this->username_err = "This username is already taken.";
+                require 'view/registerView.php';
+                return;
+            }
+            if (strlen(trim($_POST["password"])) < 6 && trim($_POST["confirm_password"]) < 6) {
+                $this->msg = "Register";
                 $this->password_err = "Password must have atleast 6 characters.";
-                if (empty($this->password_err) && ($this->password != $this->confirm_password)) {
-                    $this->confirm_password_err = "Password did not match.";
-                }
+                require 'view/registerView.php';
+                return;
+            }
+            if (($_POST["password"] != $_POST["confirm_password"])) {
+                $this->confirm_password_err = "Password did not match.";
+                $this->msg = "Register";
+                require 'view/registerView.php';
+                return;
             } else {
                 $userInserted = $registerManager->pushUserInfo($username, $password);
                 $this->msg = "Successful Registration";
@@ -54,7 +67,6 @@ class RegisterController
     }
     public function login($username, $password)
     {
-        var_dump('test');
         $registerManager = new RegisterManager();
         $userSelected = $registerManager->getUserForLogin($username, $password);
         $this->msg = "...Login";
@@ -67,6 +79,9 @@ class RegisterController
         $userLogedIn = $registerManager->getUser($username);
         $this->msg = "Welcome";
         $this->p = $username;
+        // Store data in session variables
+        // $_SESSION["loggedin"] = true;
+        // $_SESSION["id"] = $id;
         $_SESSION['username'] = $username;
         $this->username = $username;
 

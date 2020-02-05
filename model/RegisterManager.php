@@ -39,7 +39,7 @@ class RegisterManager extends Manager
     public function matchUser($username)
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT username FROM users WHERE username = "$username"');
+        $req = $db->prepare('SELECT username FROM users WHERE username = "$username"');
         $req->execute([
             'username' => $username
         ]);
