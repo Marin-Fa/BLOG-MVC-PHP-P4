@@ -7,6 +7,7 @@ use Blog\model\ContactManager;
 class ContactController
 {
     public $msg = "Contact Me";
+    public $a = "";
 
     public function showContactPage()
     {
@@ -14,25 +15,13 @@ class ContactController
     }
     public function addMessage($name, $email, $message)
     {
-        $contactManager = new ContactManager();
-        $messageInserted = $contactManager->postMessage($name, $email, $message);
-        $this->msg = "Thank You !";
-
-        if ($messageInserted === false) {
-            echo ('Impossible d\'ajouter le commentaire !');
+        if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['message'])) {
+            $contactManager = new ContactManager();
+            $messageInserted = $contactManager->postMessage($name, $email, $message);
+            $this->msg = "Thank You !";
         } else {
-            require 'view/contactView.php';
+            echo 'Fill in the form please';
         }
-        // if (isset($_POST['submit'])) {
-        //     $messageInserted = $contactManager->postMessage($name, $email, $message);
-        //     $this->msg = "Thank You !";
-        //  if ($messageInserted === false) {
-        //     throw new Exception('Impossible d\'ajouter le commentaire !');
-        // } else {
-        //     require 'view/contactView.php';
-        // }
-        //  require 'view/contactView.php';
-        // }
     }
 
 

@@ -36,4 +36,15 @@ class RegisterManager extends Manager
 
         return $userLogedIn;
     }
+    public function matchUser($username)
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT username FROM users WHERE username = "$username"');
+        $req->execute([
+            'username' => $username
+        ]);
+        $user = $req->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
 }

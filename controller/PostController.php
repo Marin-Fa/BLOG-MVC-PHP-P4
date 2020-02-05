@@ -2,27 +2,16 @@
 
 namespace Blog\controller;
 
-use Blog\model\PostManager;
-use Blog\model\CommentManager;
-
-// require_once 'model/RegisterManager.php';
+use Blog\model\{
+    PostManager,
+    CommentManager
+};
 
 class PostController
 {
     public $msg = "";
     public $p = "";
-    // public $username = "";
 
-    // public function getUsername()
-    // {
-    //     $registerManager = new RegisterManager();
-    //     $username = $registerManager->getUser($_GET['username']);
-    //     var_dump($username);
-    //     var_dump('test');
-    //     $this->username = $username;
-
-    //     require 'view/listPostsView.php';
-    // }
     public function listPosts()
     {
         $postManager = new PostManager(); // Creation obj 
@@ -35,11 +24,14 @@ class PostController
     }
     public function post()
     {
-        $postManager = new PostManager();
-        $commentManager = new CommentManager();
-
-        $post = $postManager->getPost($_GET['id']);
-        $comments = $commentManager->getComments($_GET['id']);
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            $postManager = new PostManager();
+            $commentManager = new CommentManager();
+            $post = $postManager->getPost($_GET['id']);
+            $comments = $commentManager->getComments($_GET['id']);
+        } else {
+            throw new \Exception('Aucun identifiant de billet envoyé');
+        }
 
         require 'view/postView.php';
     }

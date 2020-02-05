@@ -11,9 +11,11 @@
                 <?php endif ?>
                 <div class="row">
                     <div class="col-md-7">
-                        <?php if ($this->p) : ?>
-                            <p><?= $this->p ?></p>
+                        <?php if ($_SESSION['username']) : ?>
+                            <p><?= $_SESSION['username'] ?></p>
                         <?php endif ?>
+                        <h2>Debug</h2>
+                        <pre><?= var_dump($_SESSION) ?>'</pre>
                         <div class="text">
                             <div class="mouse">
                                 <a href="#" class="mouse-icon">

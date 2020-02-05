@@ -29,23 +29,23 @@
     <div class="container col-md-4">
         <p>Please fill this form to create an account.</p>
         <form action="index.php?action=addNewUser" method="post" class="bg-light p-4 p-md-5 contact-form">
-            <div class="form-group">
+            <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control" value="">
-                <span class="help-block"></span>
+                <input type="text" name="username" class="form-control" value="<?= $this->username; ?>">
+                <span class="help-block"><?= $this->username_err; ?></span>
             </div>
-            <div class="form-group">
+            <div class="form-group <?= $this->password_err ? 'has-error' : ''; ?>">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control" value="">
-                <span class="help-block"></span>
+                <input type="password" name="password" class="form-control" value="<?= $this->password; ?>">
+                <span class="help-block"><?= $this->password_err; ?></span>
             </div>
-            <div class="form-group">
+            <div class="form-group <?= $this->confirm_password_err ? 'has-error' : ''; ?>">
                 <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control" value="">
-                <span class="help-block"></span>
+                <input type="password" name="confirm_password" class="form-control" value="<?= $this->confirm_password; ?>">
+                <span class="help-block"><?= $this->confirm_password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary py-3 px-5" value="Submit New User">
+                <input type="submit" class="btn btn-primary py-3 px-5" value="Submit New User" name="Submit New User">
                 <input type="reset" class="btn btn-primary py-3 px-5" value="Reset">
             </div>
             <p>Already have an account? <a href="index.php?action=showLoginPage">Login here</a>.</p>

@@ -8,13 +8,15 @@ class CommentController
 {
     public function addComment($postId, $author, $comment)
     {
-        $commentManager = new CommentManager();
-        $affectedLines = $commentManager->postComment($postId, $author, $comment);
-
-        if ($affectedLines === false) {
-            throw new \Exception('Impossible d\'ajouter le commentaire !');
-        } else {
-            header('Location: index.php?action=post&id=' . $postId);
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                $commentManager = new CommentManager();
+                $affectedLines = $commentManager->postComment($postId, $author, $comment);
+                header('Location: index.php?action=post&id=' . $postId);
+                exit;
+            } else {
+                echo 'You must fill in the form';
+            }
         }
     }
     // public function oneComment($postId, $commentId)
