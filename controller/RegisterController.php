@@ -23,7 +23,7 @@ class RegisterController
     }
     public function addNewUser($username, $password)
     {
-        $user = $_POST['username'];
+        $this->username = $username;
         // Processing form data when form is submitted
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $registerManager = new RegisterManager();
@@ -34,9 +34,11 @@ class RegisterController
                 $this->confirm_password_err = "Please confirm password.";
                 $this->msg = "Register";
                 require 'view/registerView.php';
+                require 'view/registerView.php';
                 return;
             }
-            if ($user = $registerManager->matchUser($this->username) == true) {
+            var_dump($registerManager->matchUser($username));
+            if ($user = $registerManager->matchUser($this->username) === true) {
                 $this->msg = "Register";
                 $this->username_err = "This username is already taken.";
                 require 'view/registerView.php';

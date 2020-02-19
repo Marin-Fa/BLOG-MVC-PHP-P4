@@ -19,7 +19,6 @@ class PostController
         $this->msg = "Jean Forteroche";
         $this->p = "Far far away, behind the mountains, far from the industrial wolrd, lives the peacefull place in the world.";
 
-
         require 'view/listPostsView.php';
     }
     public function post()

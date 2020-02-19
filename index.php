@@ -8,7 +8,8 @@ use Blog\controller\{
     PostController,
     CommentController,
     ContactController,
-    RegisterController
+    RegisterController,
+    AdminController
 };
 
 Autoloader::register();
@@ -49,6 +50,12 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'logOut') {
         $session = new RegisterController();
         $session->logOut();
+    } elseif ($_GET['action'] == 'showAdminPanel') {
+        $admin = new AdminController();
+        $admin->showAdminPanel($_POST['name'], $_POST['password']);
+    } elseif ($_GET['action'] == 'showLoginAdminPanel') {
+        $admin = new AdminController();
+        $admin->showLoginAdminPanel();
     }
 } else {
     $post = new PostController();

@@ -9,7 +9,12 @@
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <!-- Tiny -->
-    <!-- <script src="https://cdn.tiny.cloud/1/srhkiqvonn5wda7a0350imoal8zs3grvln3eetetzvo3ktnb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
+    <script src="https://cdn.tiny.cloud/1/srhkiqvonn5wda7a0350imoal8zs3grvln3eetetzvo3ktnb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#adminform'
+        });
+    </script>
 
     <link rel="stylesheet" href="public/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="public/css/animate.css">
@@ -39,12 +44,14 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="index.php?action=showContactPage" class="nav-link">Contact</a></li>
+                    <li class="nav-item active"><a href="index.php?action=showLoginAdminPanel" class="nav-link">Admin</a></li>
                     <!-- <li class="nav-item"><a href="index.php?action=showRegisterPage" class="nav-link">Login</a></li> -->
                     <?php if (!$_SESSION) { ?>
                         <li class="nav-item"><a href="index.php?action=showRegisterPage" class="nav-link">Login</a></li>
                     <?php } elseif ($_SESSION['username']) { ?>
                         <li class="nav-item"><a href="index.php?action=logOut" class="nav-link">Logout</a></li>
                     <?php } ?>
+
                 </ul>
             </div>
         </div>

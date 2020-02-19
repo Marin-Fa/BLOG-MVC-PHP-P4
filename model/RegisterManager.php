@@ -12,9 +12,9 @@ class RegisterManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO users(username, password, created_at) VALUES (?, ?, NOW())');
-        $unserInserted = $req->execute(array($username, $password));
+        $userInserted = $req->execute(array($username, $password));
 
-        return $unserInserted;
+        return $userInserted;
     }
     public function getUserForLogin($username, $password)
     {
@@ -39,12 +39,21 @@ class RegisterManager extends Manager
     public function matchUser($username)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT username FROM users WHERE username = "$username"');
+        $req = $db->prepare('SELECT username FROM users WHERE username = :username');
         $req->execute([
             'username' => $username
         ]);
+        // var_dump($req->execute([
+        //     'username' => $username
+        // ]));
+        // return $username;
         $user = $req->fetch(PDO::FETCH_ASSOC);
 
-        return $user;
+        $trueOrfalse = $req->execute(['username' => $username]);
+        return $trueOrfalse;
+
+        // return $req($req->execute([
+        //     'username' => $username
+        // ]));
     }
 }

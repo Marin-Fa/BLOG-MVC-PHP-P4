@@ -52,6 +52,9 @@
                                     <h3><?= htmlspecialchars($comment['author']) ?></h3>
                                     <div class="meta mb-3"><?= $comment['comment_date_fr'] ?></div>
                                     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary py-3 px-5" value="Report">
+                                    </div>
                                     <!-- <p><a href="#" class="reply">Reply</a></p> -->
                                 </div>
                             </li>
