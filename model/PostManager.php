@@ -11,7 +11,7 @@ class PostManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
-
+        $posts = new Post();
         return $req;
     }
     // SELECT one post
@@ -23,5 +23,19 @@ class PostManager extends Manager
         $post = $req->fetch();
 
         return $post;
+    }
+    // UPDATE a post
+    public function updatePost($title, $content, $postId)
+    {
+        $db = $this->dbConnect();
+        $updatePost = $db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
+        $updatePost->execute(array($title, $content, $postId));
+    }
+    // DELETE a post
+    public function deletePost($postId)
+    {
+        $db = $this->dbConnect();
+        $deletePost = $db->prepare('DELETE FROM p4_posts WHERE post_id = ?');
+        $deletePost->execute(array($postId));
     }
 }

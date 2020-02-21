@@ -56,8 +56,8 @@ if (isset($_GET['action'])) {
         $admin = new AdminController();
         $admin->showLoginAdminPanel();
     } elseif ($_GET['action'] == 'dashboardPost') {
-        $post = new AdminController();
-        $post->dashboardPost();
+        // $post = new AdminController();
+        // $post->dashboardPost();
     }
 } else {
     $post = new PostController();

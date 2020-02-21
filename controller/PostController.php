@@ -12,6 +12,8 @@ class PostController
     public $msg = "";
     public $p = "";
 
+
+    // Display all posts
     public function listPosts()
     {
         $postManager = new PostManager();
@@ -21,6 +23,7 @@ class PostController
 
         require 'view/listPostsView.php';
     }
+    // Display one posts with it's comments
     public function post()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -33,5 +36,14 @@ class PostController
         }
 
         require 'view/postView.php';
+    }
+    // Delete a post
+    public function deletePost()
+    {
+        if (htmlentities(isset($_GET['id']))) {
+            $postManager = new PostManager();
+            $postManager->deletePost($_GET['id']);
+            echo json_encode('success');
+        }
     }
 }

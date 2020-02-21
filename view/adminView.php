@@ -46,7 +46,7 @@
                                     <div class="text w-100 pl-md-3">
                                         <p class="text-center">Title</p>
                                         <h3 class="text-center">
-                                            <a href="index.php?action=post&amp;id=<?= $data['id'] ?>"><?= htmlspecialchars($data['title']) ?></a>
+                                            <?= htmlspecialchars($data['title']) ?>
                                         </h3>
                                         <p class="text-center">Comments number</p>
                                         <h3 class="text-center">
@@ -54,12 +54,12 @@
                                         </h3>
                                         <p class="text-center">Creation date</p>
                                         <h3 class="text-center">
-                                            Creation date
+                                            <?= htmlspecialchars($data['creation_date_fr']) ?>
                                         </h3>
                                         <br>
                                         <p class="text-center">Available options</p>
                                         <div class="d-flex justify-content-center">
-                                            <a href="" class="btn btn-primary btn-sm mx-2">See</a>
+                                            <a href="index.php?action=post&amp;id=<?= $data['id'] ?>" class="btn btn-primary btn-sm mx-2">See</a>
                                             <a href="" class="btn btn-warning btn-sm mx-2">Modify</a>
                                             <a href="" class="delete-post btn btn-danger btn-sm mx-2">Delete</a>
                                         </div>
