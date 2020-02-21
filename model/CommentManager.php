@@ -21,9 +21,16 @@ class CommentManager extends Manager
         $db = $this->dbConnect();
         $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
         $affectedLines = $comments->execute(array($postId, $author, $comment));
-        var_dump($affectedLines);
 
         return $affectedLines;
+    }
+    public function getCommentsAdmin()
+    {
+        $db = $this->dbConnect();
+        $comments = $db->query('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments ORDER BY comment_date DESC');
+        $comments->execute();
+
+        return $comments;
     }
     // public function readOneComment($postId, $commentId)
     // {

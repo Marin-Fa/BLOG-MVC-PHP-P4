@@ -7,7 +7,6 @@
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
             <div class="col-md-12 ftco-animate">
-                <!-- <h2 class="subheading">Hello! Welcome to</h2> -->
                 <h1 class="mb-4 mb-md-0"><?= $this->msg ?></h1>
                 <div class="row">
                     <div class="col-md-7">
@@ -45,31 +44,24 @@
                             ?>
                                 <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
                                     <div class="text w-100 pl-md-3">
+                                        <p class="text-center">Title</p>
                                         <h3 class="text-center">
-                                            Title
-                                        </h3>
-                                        <p class="text-center">
                                             <a href="index.php?action=post&amp;id=<?= $data['id'] ?>"><?= htmlspecialchars($data['title']) ?></a>
-                                        </p>
+                                        </h3>
+                                        <p class="text-center">Comments number</p>
                                         <h3 class="text-center">
                                             Comments number
                                         </h3>
-                                        <p class="text-center">
-                                            <?= $posts->getNbComments() ?>
-                                        </p>
+                                        <p class="text-center">Creation date</p>
                                         <h3 class="text-center">
                                             Creation date
                                         </h3>
-                                        <p class="text-center">
-                                            <?= strip_tags($posts->getCreationDate('d-m-Y')) ?>
-                                        </p>
-                                        <h3 class="text-center">
-                                            Available options
-                                        </h3>
+                                        <br>
+                                        <p class="text-center">Available options</p>
                                         <div class="d-flex justify-content-center">
-                                            <a href="index.php?p=post-admin&id=<?= $posts->getId() ?>" class="btn btn-primary btn-sm mx-2">See</a>
-                                            <a href="index.php?p=post-edit&id=<?= $posts->getId() ?>" class="btn btn-warning btn-sm mx-2">Modify</a>
-                                            <a href="index.php?p=post-delete&id=<?= $posts->getId() ?>" class="delete-post btn btn-danger btn-sm mx-2">Delete</a>
+                                            <a href="" class="btn btn-primary btn-sm mx-2">See</a>
+                                            <a href="" class="btn btn-warning btn-sm mx-2">Modify</a>
+                                            <a href="" class="delete-post btn btn-danger btn-sm mx-2">Delete</a>
                                         </div>
                                     </div>
                                 </div>

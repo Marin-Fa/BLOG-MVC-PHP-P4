@@ -26,19 +26,18 @@ class AdminController
             require 'view/adminLoginView.php';
         } else {
             $this->msg = 'Admin';
+            $postsList = new PostManager();
+            $posts = $postsList->getPosts();
+            $commentList = new CommentManager();
+            $comments = $commentList->getCommentsAdmin();
             require 'view/adminView.php';
         }
     }
     public function dashboardPost()
     {
-        if ($_SESSION['status'] === 'admin') {
-            $postsList = new PostManager();
-            $posts = $postsList->getPosts();
-            var_dump($posts);
-            require 'view/adminView.php';
-        } else {
-            header('Location: index.php');
-            exit;
-        }
+        $postsList = new PostManager();
+        $posts = $postsList->getPosts();
+        var_dump($posts);
+        require 'view/adminView.php';
     }
 }
