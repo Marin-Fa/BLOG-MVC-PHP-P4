@@ -14,8 +14,8 @@ class PostController
 
     public function listPosts()
     {
-        $postManager = new PostManager(); // Creation obj 
-        $posts = $postManager->getPosts(); // Call the function
+        $postManager = new PostManager();
+        $posts = $postManager->getPosts();
         $this->msg = "Jean Forteroche";
         $this->p = "Far far away, behind the mountains, far from the industrial wolrd, lives the peacefull place in the world.";
 

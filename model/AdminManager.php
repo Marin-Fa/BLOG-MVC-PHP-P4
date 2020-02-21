@@ -13,7 +13,6 @@ class AdminManager extends Manager
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT admin_name, password FROM admin WHERE admin_name = ? AND password = ?');
         $req->execute(array($name, $password));
-        // var_dump($name, $password);
         return $req->fetch();
     }
 }

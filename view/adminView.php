@@ -25,6 +25,67 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="row header-dashboard py-5">
+        <div class="col-md-12 text-center">
+            <h2>Posts</h2>
+            <a href="" class="btn btn-primary">Manage comments</a>
+            <a href="" class="btn btn-primary">Create a post</a>
+        </div>
+    </div>
+
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="case">
+                        <div class="row">
+                            <?php
+                            while ($data = $posts->fetch()) {
+                            ?>
+                                <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
+                                    <div class="text w-100 pl-md-3">
+                                        <h3 class="text-center">
+                                            Title
+                                        </h3>
+                                        <p class="text-center">
+                                            <a href="index.php?action=post&amp;id=<?= $data['id'] ?>"><?= htmlspecialchars($data['title']) ?></a>
+                                        </p>
+                                        <h3 class="text-center">
+                                            Comments number
+                                        </h3>
+                                        <p class="text-center">
+                                            <?= $posts->getNbComments() ?>
+                                        </p>
+                                        <h3 class="text-center">
+                                            Creation date
+                                        </h3>
+                                        <p class="text-center">
+                                            <?= strip_tags($posts->getCreationDate('d-m-Y')) ?>
+                                        </p>
+                                        <h3 class="text-center">
+                                            Available options
+                                        </h3>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="index.php?p=post-admin&id=<?= $posts->getId() ?>" class="btn btn-primary btn-sm mx-2">See</a>
+                                            <a href="index.php?p=post-edit&id=<?= $posts->getId() ?>" class="btn btn-warning btn-sm mx-2">Modify</a>
+                                            <a href="index.php?p=post-delete&id=<?= $posts->getId() ?>" class="delete-post btn btn-danger btn-sm mx-2">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                            $posts->closeCursor();
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
 <form action="" method="post" class="p-5 bg-light">
     <div class="form-group">
         <label for="adminform">Comment</label><br />

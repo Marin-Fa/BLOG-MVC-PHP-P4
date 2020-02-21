@@ -2,7 +2,11 @@
 
 namespace Blog\controller;
 
-use Blog\model\AdminManager;
+use Blog\model\{
+    AdminManager,
+    PostManager,
+    CommentManager
+};
 
 class AdminController
 {
@@ -16,17 +20,25 @@ class AdminController
 
     public function showAdminPanel($name, $password)
     {
-        var_dump($name, $password);
         $adminManager = new AdminManager();
         if (!$adminManager->getAuth($name, $password)) {
-            echo 'nope';
             $this->msg = 'Invalid';
             require 'view/adminLoginView.php';
         } else {
-            var_dump($name, $password);
-            echo 'coucou';
             $this->msg = 'Admin';
             require 'view/adminView.php';
+        }
+    }
+    public function dashboardPost()
+    {
+        if ($_SESSION['status'] === 'admin') {
+            $postsList = new PostManager();
+            $posts = $postsList->getPosts();
+            var_dump($posts);
+            require 'view/adminView.php';
+        } else {
+            header('Location: index.php');
+            exit;
         }
     }
 }

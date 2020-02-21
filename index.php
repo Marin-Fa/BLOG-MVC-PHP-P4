@@ -46,7 +46,6 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'getUsername') {
         // $username = new PostController();
         // $username->getUsername($_GET['username']);
-        // var_dump($_GET['username']);
     } elseif ($_GET['action'] == 'logOut') {
         $session = new RegisterController();
         $session->logOut();
@@ -56,23 +55,11 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'showLoginAdminPanel') {
         $admin = new AdminController();
         $admin->showLoginAdminPanel();
-    } elseif ($_GET['action'] == 'loginAdmin') {
-        // $admin = new AdminController();
-        // $admin->loginAdmin();
+    } elseif ($_GET['action'] == 'dashboardPost') {
+        $post = new AdminController();
+        $post->dashboardPost();
     }
 } else {
     $post = new PostController();
     $post->listPosts();
-    // elseif ($_GET['action'] == 'onecomment') {
-    //     if (isset($_GET['id']) && $_GET['id'] > 0) {
-    //         $comment = new CommentController();
-    //         $comment->oneComment($_GET['post'], $_GET['id']);
-    //     }
-    // } elseif ($_GET['action'] == 'update') {
-    //     $comment = new CommentController();
-    //     $comment->updateActionComment($_POST['author'], $_POST['comment'], $_POST['postId'], $_POST['id']);
-    // }
-    // } else {
-    //     $post = new PostController();
-    //     $post->listPosts();
 }
