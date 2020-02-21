@@ -16,17 +16,24 @@ class AdminController
 
     public function showAdminPanel($name, $password)
     {
-        if ($_POST['name'] === $name || $_POST['password'] === $password) {
+        if ($_POST['admin_name'] === $name || $_POST['password'] === $password) {
             $adminManager = new AdminManager();
-            $adminManager->getAuth($name, $password);
-            // var_dump($name, $password);
-            $this->msg = 'Admin';
+            if (!$adminManager->getAuth($name, $password)) {
+                echo 'nope';
+                $this->msg = 'Invalid';
+                require 'view/adminLoginView.php';
+                return;
+            } else {
+                var_dump($name, $password);
+                echo 'coucou';
+                $this->msg = 'Admin';
+                require 'view/adminView.php';
+                return;
+            }
         } else {
-            echo 'nope';
-            $this->msg = 'Invalid';
-            return;
+            echo 'coucou';
+            $this->msg = 'Admin';
+            require 'view/adminView.php';
         }
-
-        require 'view/adminView.php';
     }
 }

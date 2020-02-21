@@ -29,7 +29,7 @@
         <form action="index.php?action=showAdminPanel" method="post" class="bg-light p-4 p-md-5 contact-form">
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" name="name" class="form-control" value="">
+                <input type="text" name="admin_name" class="form-control" value="">
                 <span class="help-block"></span>
             </div>
             <div class="form-group">

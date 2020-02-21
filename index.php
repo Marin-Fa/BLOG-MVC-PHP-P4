@@ -52,10 +52,13 @@ if (isset($_GET['action'])) {
         $session->logOut();
     } elseif ($_GET['action'] == 'showAdminPanel') {
         $admin = new AdminController();
-        $admin->showAdminPanel($_POST['name'], $_POST['password']);
+        $admin->showAdminPanel($_POST['admin_name'], $_POST['password']);
     } elseif ($_GET['action'] == 'showLoginAdminPanel') {
         $admin = new AdminController();
         $admin->showLoginAdminPanel();
+    } elseif ($_GET['action'] == 'loginAdmin') {
+        // $admin = new AdminController();
+        // $admin->loginAdmin();
     }
 } else {
     $post = new PostController();
