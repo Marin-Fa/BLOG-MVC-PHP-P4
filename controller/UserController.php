@@ -2,23 +2,42 @@
 
 namespace Blog\controller;
 
-use Blog\model\{
-    RegisterManager,
-    PostManager
-};
+use Blog\model\{CommentManager, PostManager, UserManager};
 
-class RegisterController
+class UserController
 {
     public $msg = "";
     public $p = "";
     public $username =  "";
     public $password = "";
+    public $role = "";
     public $confirm_password = "";
     public $username_err  =  "";
     public $password_err = "";
     public $confirm_password_err = "";
     public $id = "";
 
+    public function showLoginAdminPanel()
+    {
+        $this->msg = 'Login Admin';
+        require 'view/adminLoginView.php';
+    }
+    public function showAdminPanel($name, $password)
+    {
+        $userManager = new UserManager();
+        if (!$userManager->getAuth($name, $password)) {
+            var_dump($name, $password);
+            $this->msg = 'Invalid';
+            require 'view/adminLoginView.php';
+        } else {
+            $this->msg = 'Hello Admin';
+            $postsList = new PostManager();
+            $posts = $postsList->getPosts();
+            $commentList = new CommentManager();
+            $comments = $commentList->getCommentsAdmin();
+            require 'view/adminView.php';
+        }
+    }
     public function showRegisterPage()
     {
         $this->msg = "Register";
@@ -29,7 +48,7 @@ class RegisterController
         $this->username = $username;
         // Processing form data when form is submitted
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $registerManager = new RegisterManager();
+            $userManager = new UserManager();
             if (empty(trim($_POST["username"])) || empty(trim($_POST["password"])) || empty(trim($_POST["confirm_password"]))) {
                 // echo 'nope';
                 $this->username_err = "Please enter a username.";
@@ -40,8 +59,8 @@ class RegisterController
                 require 'view/registerView.php';
                 return;
             }
-            var_dump($registerManager->matchUser($username));
-            if ($user = $registerManager->matchUser($this->username) === true) {
+            var_dump($userManager->matchUser($username));
+            if ($user = $userManager->matchUser($this->username) === true) {
                 $this->msg = "Register";
                 $this->username_err = "This username is already taken.";
                 require 'view/registerView.php';
@@ -59,7 +78,7 @@ class RegisterController
                 require 'view/registerView.php';
                 return;
             } else {
-                $userInserted = $registerManager->pushUserInfo($username, $password);
+                $userInserted = $userManager->pushUserInfo($username, $password);
                 $this->msg = "Successful Registration";
                 require 'view/loginView.php';
             }
@@ -70,23 +89,26 @@ class RegisterController
         $this->msg = "...Login";
         require 'view/loginView.php';
     }
-//    public function login($username, $password)
-//    {
-//        $registerManager = new RegisterManager();
-//        $userSelected = $registerManager->getUserForLogin($username, $password);
-//        $this->msg = "...Login";
-//
-//        require 'view/loginView.php';
-//    }
     public function welcome($username, $password)
     {
-        $registerManager = new RegisterManager();
-        if (!$registerManager->getUser($username, $password)) {
+        $userManager = new UserManager();
+        $user = $userManager->getRole($username, $password);
+        if (!$userManager->getAuth($username, $password)) {
             $this->msg = 'Something went wrong';
             require 'view/loginView.php';
+        } elseif ($user['role'] === 'admin') {
+            $this->role = 'admin';
+            $this->msg = 'Hello Admin';
+            $_SESSION['username'] = $username;
+            $postsList = new PostManager();
+            $posts = $postsList->getPosts();
+            $commentList = new CommentManager();
+            $comments = $commentList->getCommentsAdmin();
+            require 'view/adminView.php';
         } else {
             $postManager = new PostManager();
             $posts = $postManager->getPosts();
+            $this->role = 'user';
             $this->msg = "Welcome";
             $this->p = $username;
             $_SESSION['username'] = $username;

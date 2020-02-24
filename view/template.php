@@ -44,7 +44,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="index.php?action=showContactPage" class="nav-link">Contact</a></li>
-                    <li class="nav-item active"><a href="index.php?action=showLoginAdminPanel" class="nav-link">Admin</a></li>
+<!--                    <li class="nav-item active"><a href="index.php?action=showLoginAdminPanel" class="nav-link">Admin</a></li>-->
                     <?php if (!$_SESSION) { ?>
                         <li class="nav-item"><a href="index.php?action=showRegisterPage" class="nav-link">Login</a></li>
                     <?php } elseif ($_SESSION['username']) { ?>

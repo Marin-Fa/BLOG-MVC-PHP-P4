@@ -9,6 +9,7 @@ class User
     private $_id;
     private $_username;
     private $_password;
+    private $_role;
     private $_created_at;
 
     // Constructor
@@ -44,6 +45,10 @@ class User
     {
         $this->_password = $password;
     }
+    public function setRole(string $role)
+    {
+        $this->_role = $role;
+    }
     public function setCreatedAt($createdAt)
     {
         $this->_created_at = new DateTime($createdAt);
@@ -61,6 +66,10 @@ class User
     public function getPassword(): string
     {
         return $this->_password;
+    }
+    public function getRole(): string
+    {
+        return $this->_role;
     }
     public function getCreatedAt()
     {

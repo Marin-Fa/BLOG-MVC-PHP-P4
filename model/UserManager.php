@@ -1,13 +1,32 @@
 <?php
 
+
 namespace Blog\model;
 
 use Blog\model\User;
 
 use PDO;
 
-class RegisterManager extends Manager
+class UserManager extends Manager
 {
+    // Matching username and password
+    public function getAuth($name, $password)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT username, password, role FROM user WHERE username = ? AND password = ?');
+        $req->execute(array($name, $password));
+        return $req->fetch();
+    }
+
+    // Get role admin/user
+    public function getRole($username, $password)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT role FROM user WHERE username = ? AND password = ?');
+        $req->execute(array($username, $password));
+        return $req->fetch();
+    }
+
     public function pushUserInfo($username, $password)
     {
         $db = $this->dbConnect();
@@ -16,30 +35,19 @@ class RegisterManager extends Manager
 
         return $userInserted;
     }
-//    public function getUserForLogin($username, $password)
-//    {
-//        var_dump('test');
-//        $db = $this->dbConnect();
-//        $req = $db->prepare('SELECT id, username, password FROM users WHERE username = ? AND password = ?');
-//        $req->bindParam("username", $username, PDO::PARAM_STR);
-//        $req->execute(array($username, $password));
-//        $userSelected = $req->fetch();
-//
-//        return $userSelected;
-//    }
+
     public function getUser($username, $password)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, username, password FROM users WHERE username = ? AND password = ?');
+        $req = $db->prepare('SELECT id, username, password FROM user WHERE username = ? AND password = ?');
         $req->execute(array($username, $password));
-        $userLogedIn = $req->fetch();
-
-        return $userLogedIn;
+        return $req->fetch();
     }
+
     public function matchUser($username)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT username FROM users WHERE username = :username');
+        $req = $db->prepare('SELECT username FROM user WHERE username = :username');
         $req->execute([
             'username' => $username
         ]);

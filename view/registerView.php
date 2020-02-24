@@ -50,9 +50,6 @@
             </div>
             <p>Already have an account? <a href="index.php?action=showLoginPage">Login here</a>.</p>
         </form>
-        <form action="index.php?action=logOut">
-            <input type="submit" class="btn btn-primary py-3 px-5" id="logout" value="logout" name="logout">
-        </form>
     </div>
 </section>
 

@@ -8,8 +8,7 @@ use Blog\controller\{
     PostController,
     CommentController,
     ContactController,
-    RegisterController,
-    AdminController
+    UserController
 };
 
 Autoloader::register();
@@ -29,36 +28,32 @@ if (isset($_GET['action'])) {
         $message = new ContactController();
         $message->addMessage($_POST['name'], $_POST['email'], $_POST['message']);
     } elseif ($_GET['action'] == 'showRegisterPage') {
-        $user = new RegisterController();
+        $user = new UserController();
         $user->showRegisterPage();
     } elseif ($_GET['action'] == 'addNewUser') {
-        $user = new RegisterController();
+        $user = new UserController();
         $user->addNewUser($_POST['username'], $_POST['password']);
     } elseif ($_GET['action'] == 'showLoginPage') {
-        $view = new RegisterController();
+        $view = new UserController();
         $view->showLoginPage();
-
 //    } elseif ($_GET['action'] == 'login') {
 //        $userSelected = new RegisterController();
 //        $userSelected->login($_POST['username'], $_POST['password']);
     } elseif ($_GET['action'] == 'welcome') {
-        $userLogedIn = new RegisterController();
+        $userLogedIn = new UserController();
         $userLogedIn->welcome($_POST['username'], $_POST['password']);
-    } elseif ($_GET['action'] == 'getUsername') {
-        // $username = new PostController();
-        // $username->getUsername($_GET['username']);
+    } elseif ($_GET['action'] == 'getAuth') {
+//         $username = new UserController();
+//         $username->getAuth($_POST['username'], $_POST['password']);
     } elseif ($_GET['action'] == 'logOut') {
-        $session = new RegisterController();
+        $session = new UserController();
         $session->logOut();
     } elseif ($_GET['action'] == 'showAdminPanel') {
-        $admin = new AdminController();
+        $admin = new UserController();
         $admin->showAdminPanel($_POST['username'], $_POST['password']);
     } elseif ($_GET['action'] == 'showLoginAdminPanel') {
-        $admin = new AdminController();
+        $admin = new UserController();
         $admin->showLoginAdminPanel();
-    } elseif ($_GET['action'] == 'dashboardPost') {
-        // $post = new AdminController();
-        // $post->dashboardPost();
     }
 } else {
     $post = new PostController();
