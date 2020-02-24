@@ -11,7 +11,7 @@ class AdminManager extends Manager
     public function getAuth($name, $password)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT admin_name, password FROM admin WHERE admin_name = ? AND password = ?');
+        $req = $db->prepare('SELECT username, password FROM user WHERE username = ? AND password = ?');
         $req->execute(array($name, $password));
         return $req->fetch();
     }

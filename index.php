@@ -37,12 +37,13 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'showLoginPage') {
         $view = new RegisterController();
         $view->showLoginPage();
-    } elseif ($_GET['action'] == 'login') {
-        $userSelected = new RegisterController();
-        $userSelected->login($_POST['username'], $_POST['password']);
+
+//    } elseif ($_GET['action'] == 'login') {
+//        $userSelected = new RegisterController();
+//        $userSelected->login($_POST['username'], $_POST['password']);
     } elseif ($_GET['action'] == 'welcome') {
         $userLogedIn = new RegisterController();
-        $userLogedIn->welcome($_POST['username']);
+        $userLogedIn->welcome($_POST['username'], $_POST['password']);
     } elseif ($_GET['action'] == 'getUsername') {
         // $username = new PostController();
         // $username->getUsername($_GET['username']);
@@ -51,7 +52,7 @@ if (isset($_GET['action'])) {
         $session->logOut();
     } elseif ($_GET['action'] == 'showAdminPanel') {
         $admin = new AdminController();
-        $admin->showAdminPanel($_POST['admin_name'], $_POST['password']);
+        $admin->showAdminPanel($_POST['username'], $_POST['password']);
     } elseif ($_GET['action'] == 'showLoginAdminPanel') {
         $admin = new AdminController();
         $admin->showLoginAdminPanel();

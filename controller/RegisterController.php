@@ -2,7 +2,10 @@
 
 namespace Blog\controller;
 
-use Blog\model\RegisterManager;
+use Blog\model\{
+    RegisterManager,
+    PostManager
+};
 
 class RegisterController
 {
@@ -67,30 +70,35 @@ class RegisterController
         $this->msg = "...Login";
         require 'view/loginView.php';
     }
-    public function login($username, $password)
+//    public function login($username, $password)
+//    {
+//        $registerManager = new RegisterManager();
+//        $userSelected = $registerManager->getUserForLogin($username, $password);
+//        $this->msg = "...Login";
+//
+//        require 'view/loginView.php';
+//    }
+    public function welcome($username, $password)
     {
         $registerManager = new RegisterManager();
-        $userSelected = $registerManager->getUserForLogin($username, $password);
-        $this->msg = "...Login";
-
-        require 'view/loginView.php';
-    }
-    public function welcome($username)
-    {
-        $registerManager = new RegisterManager();
-        $userLogedIn = $registerManager->getUser($username);
-        $this->msg = "Welcome";
-        $this->p = $username;
-        // Store data in session variables
-        // $_SESSION["loggedin"] = true;
-        // $_SESSION["id"] = $id;
-        $_SESSION['username'] = $username;
-        $this->username = $username;
-
-        require 'view/welcomeView.php';
+        if (!$registerManager->getUser($username, $password)) {
+            $this->msg = 'Something went wrong';
+            require 'view/loginView.php';
+        } else {
+            $postManager = new PostManager();
+            $posts = $postManager->getPosts();
+            $this->msg = "Welcome";
+            $this->p = $username;
+            $_SESSION['username'] = $username;
+            $this->username = $username;
+            $this->password = $password;
+            require 'view/listPostsView.php';
+        }
     }
     public function logOut()
     {
+        $postManager = new PostManager();
+        $posts = $postManager->getPosts();
         $this->msg = "See Ya";
         unset($_SESSION['username']);
         // Unset all of the session variables
@@ -98,7 +106,7 @@ class RegisterController
         // Destroy the session.
         session_destroy();
         // Redirect to login page
-        require 'view/logedOutView.php';
+        require 'view/listPostsView.php';
         exit;
     }
 }

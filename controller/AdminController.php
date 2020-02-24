@@ -22,6 +22,7 @@ class AdminController
     {
         $adminManager = new AdminManager();
         if (!$adminManager->getAuth($name, $password)) {
+            var_dump($name, $password);
             $this->msg = 'Invalid';
             require 'view/adminLoginView.php';
         } else {
