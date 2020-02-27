@@ -23,6 +23,7 @@ class PostController
 
         require 'view/listPostsView.php';
     }
+
     // Display one posts with it's comments
     public function post()
     {
@@ -31,12 +32,15 @@ class PostController
             $commentManager = new CommentManager();
             $post = $postManager->getPost($_GET['id']);
             $comments = $commentManager->getComments($_GET['id']);
+            $nbComments = $commentManager->getNbComments($_GET['id']);
+            var_dump($nbComments);
         } else {
             throw new \Exception('Aucun identifiant de billet envoyé');
         }
 
         require 'view/postView.php';
     }
+
     // Delete a post
     public function deletePost()
     {

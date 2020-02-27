@@ -27,41 +27,24 @@ class UserManager extends Manager
         return $req->fetch();
     }
 
+    // Insert a new user with role = user
     public function pushUserInfo($username, $password)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO users(username, password, created_at) VALUES (?, ?, NOW())');
-        $userInserted = $req->execute(array($username, $password));
-
-        return $userInserted;
-    }
-
-    public function getUser($username, $password)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, username, password FROM user WHERE username = ? AND password = ?');
+        $req = $db->prepare('INSERT INTO user(username, password, created_at, role) VALUES (?, ?, NOW(), "user")');
         $req->execute(array($username, $password));
-        return $req->fetch();
+
+        return $req;
     }
 
+    // Check if the username is allready taken
     public function matchUser($username)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT username FROM user WHERE username = :username');
-        $req->execute([
-            'username' => $username
-        ]);
-        // var_dump($req->execute([
-        //     'username' => $username
-        // ]));
-        // return $username;
-        $user = $req->fetch(PDO::FETCH_ASSOC);
-
-        $trueOrfalse = $req->execute(['username' => $username]);
-        return $trueOrfalse;
-
-        // return $req($req->execute([
-        //     'username' => $username
-        // ]));
+        $req = $db->prepare('SELECT id FROM user WHERE username = ?');
+        $req->execute(array($username));
+        $req->fetch();
+//        var_dump($req->fetch());
+        return $req;
     }
 }

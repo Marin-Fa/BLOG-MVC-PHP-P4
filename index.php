@@ -36,15 +36,9 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'showLoginPage') {
         $view = new UserController();
         $view->showLoginPage();
-//    } elseif ($_GET['action'] == 'login') {
-//        $userSelected = new RegisterController();
-//        $userSelected->login($_POST['username'], $_POST['password']);
     } elseif ($_GET['action'] == 'welcome') {
         $userLogedIn = new UserController();
         $userLogedIn->welcome($_POST['username'], $_POST['password']);
-    } elseif ($_GET['action'] == 'getAuth') {
-//         $username = new UserController();
-//         $username->getAuth($_POST['username'], $_POST['password']);
     } elseif ($_GET['action'] == 'logOut') {
         $session = new UserController();
         $session->logOut();

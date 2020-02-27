@@ -11,7 +11,7 @@ class CommentController
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (!empty($_POST['author']) && !empty($_POST['comment'])) {
                 $commentManager = new CommentManager();
-                $affectedLines = $commentManager->postComment($postId, $author, $comment);
+                $comments = $commentManager->postComment($postId, $author, $comment);
                 header('Location: index.php?action=post&id=' . $postId);
                 exit;
             } else {

@@ -15,6 +15,7 @@ class CommentManager extends Manager
 
         return $comments;
     }
+
     // Ajouter un commentaire
     public function postComment($postId, $author, $comment)
     {
@@ -24,6 +25,7 @@ class CommentManager extends Manager
 
         return $affectedLines;
     }
+
     public function getCommentsAdmin()
     {
         $db = $this->dbConnect();
@@ -31,6 +33,15 @@ class CommentManager extends Manager
         $comments->execute();
 
         return $comments;
+    }
+
+    public function getNbComments($postId)
+    {
+        $db = $this->dbConnect();
+        $comments = $db->prepare('SELECT COUNT(*) AS nb_comments FROM comments WHERE post_id = ?');
+        $comments->execute([$postId]);
+        $nbComments = $comments->fetch();
+        return $nbComments;
     }
     // public function readOneComment($postId, $commentId)
     // {
