@@ -10,7 +10,7 @@ class ContactManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO contact(name, email, message, date) VALUES(?, ?, ?, NOW())');
-        $messageInserted = $req->execute(array($name, $email, $message));
+        $messageInserted = $req->execute([$name, $email, $message]);
 
         return $messageInserted;
     }

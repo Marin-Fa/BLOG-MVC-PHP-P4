@@ -13,6 +13,8 @@ use Blog\controller\{
 
 Autoloader::register();
 session_start();
+var_dump($_SESSION['role']);
+
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'post') {
@@ -44,10 +46,25 @@ if (isset($_GET['action'])) {
         $session->logOut();
     } elseif ($_GET['action'] == 'showAdminPanel') {
         $admin = new UserController();
-        $admin->showAdminPanel($_POST['username'], $_POST['password']);
+        $admin->showAdminPanel();
     } elseif ($_GET['action'] == 'showLoginAdminPanel') {
         $admin = new UserController();
         $admin->showLoginAdminPanel();
+    } elseif ($_GET['action'] == 'createPostView') {
+        $post = new PostController();
+        $post->createPostView();
+    } elseif ($_GET['action'] == 'sendPost') {
+        $post = new PostController();
+        $post->sendPost();
+    } elseif ($_GET['action'] == 'modifyPost') {
+        $post = new PostController();
+        $post->modifyPost();
+    } elseif ($_GET['action'] == 'modifyPostView') {
+        $post = new PostController();
+        $post->modifyPostView();
+    } elseif ($_GET['action'] == 'deletePost') {
+        $post = new PostController();
+        $post->deletePost();
     }
 } else {
     $post = new PostController();

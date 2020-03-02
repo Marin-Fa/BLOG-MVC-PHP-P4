@@ -4,6 +4,7 @@ namespace Blog\controller;
 
 use Blog\model\{
     PostManager,
+    Post,
     CommentManager
 };
 
@@ -41,13 +42,64 @@ class PostController
         require 'view/postView.php';
     }
 
+    public function createPostView()
+    {
+        $this->msg = 'Create a Post';
+        require 'view/createPostView.php';
+    }
+
+    public function modifyPostView()
+    {
+        $this->msg = 'Modify a Post';
+        $postManager = new PostManager();
+        $post = $postManager->getPost($_GET['id']);
+        require 'view/modifyPostView.php';
+    }
+
+    public function sendPost()
+    {
+        if (!empty($_POST['title']) && !empty($_POST['content']) && strlen(trim($_POST['title']))) {
+            $newPost = new Post([
+                'title' => $_POST['title'],
+                'content' => $_POST['content']]);
+            var_dump($newPost);
+            $postManager = new PostManager();
+            $create = $postManager->createPost($newPost);
+            var_dump($create);
+            if ($postManager === false) {
+                $this->msg = 'Cannot add post';
+                require 'view/createPostView.php';
+            } else {
+                $this->msg = 'Post added !';
+                require 'view/adminView.php';
+            }
+        }
+    }
+
     // Delete a post
     public function deletePost()
     {
         if (htmlentities(isset($_GET['id']))) {
             $postManager = new PostManager();
+            $posts = $postManager->getPosts();
             $postManager->deletePost($_GET['id']);
-            echo json_encode('success');
+            $this->msg = 'Post has been deleted';
+            require 'view/adminView.php';
         }
     }
+
+    public function modifyPost()
+    {
+        if (!empty($_POST['title']) && !empty($_POST['content'])) {
+
+            $postManager = new PostManager();
+            $post = $postManager->updatePost($_POST['title'], $_POST['content'], $_GET['id']);
+            $this->msg = 'Update post';
+            require 'view/modifyPostView.php';
+        } else {
+            $this->msg = 'Something went wrong';
+            require 'view/adminView.php';
+        }
+    }
+
 }

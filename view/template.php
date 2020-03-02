@@ -50,7 +50,12 @@
                     <li class="nav-item"><a href="index.php?action=showRegisterPage" class="nav-link">Login</a></li>
                 <?php } elseif ($_SESSION['username']) { ?>
                     <li class="nav-item"><a href="index.php?action=logOut" class="nav-link">Logout</a></li>
+                <?php } elseif ($_SESSION['role'] === 'admin') { ?>
+                    <li class="nav-item"><a href="index.php?action=showAdminView" class="nav-link">Admin</a></li>
+                <?php } elseif ($_SESSION['role'] === 'user') { ?>
+                    <li class="nav-item"><a href="index.php" class="nav-link"></a></li>
                 <?php } ?>
+
 
             </ul>
         </div>

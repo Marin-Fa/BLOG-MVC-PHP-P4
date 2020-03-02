@@ -37,21 +37,15 @@ class UserController
         require 'view/adminLoginView.php';
     }
 
-    public function showAdminPanel($name, $password)
+    public function showAdminPanel()
     {
-        $userManager = new UserManager();
-        if (!$userManager->getAuth($name, $password)) {
-            var_dump($name, $password);
-            $this->msg = 'Invalid';
-            require 'view/adminLoginView.php';
-        } else {
-            $this->msg = 'Hello Admin';
-            $postsList = new PostManager();
-            $posts = $postsList->getPosts();
-            $commentList = new CommentManager();
-            $comments = $commentList->getCommentsAdmin();
-            require 'view/adminView.php';
-        }
+        $this->msg = 'Hello Admin';
+        $postsList = new PostManager();
+        $posts = $postsList->getPosts();
+        $commentList = new CommentManager();
+        $comments = $commentList->getCommentsAdmin();
+        require 'view/adminView.php';
+
     }
 
     public function showRegisterPage()
@@ -120,9 +114,9 @@ class UserController
             $this->role = 'admin';
             $this->msg = 'Hello Admin';
             $_SESSION['username'] = $username;
+            $_SESSION['role'] = 'admin';
             $posts = $postManager->getPosts();
-            $comments = $commentManager->getNbComments($_POST['nb_comments']);
-            var_dump($comments);
+            $comments = $commentManager->getNbComment();
             require 'view/adminView.php';
         } else {
             $posts = $postManager->getPosts();
@@ -130,9 +124,10 @@ class UserController
             $this->msg = "Welcome";
             $this->p = $username;
             $_SESSION['username'] = $username;
+            $_SESSION['role'] = 'user';
             $this->username = $username;
             $this->password = $password;
-            require 'view/listPostsView.php';
+            header('Location: index.php');
         }
     }
 

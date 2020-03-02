@@ -31,7 +31,7 @@
             <div class="col-md-12 text-center">
                 <h2>Posts</h2>
                 <a href="" class="btn btn-primary">Manage comments</a>
-                <a href="" class="btn btn-primary">Create a post</a>
+                <a href="index.php?action=createPostView" class="btn btn-primary">Create a post</a>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
                                             </h3>
                                             <p class="text-center">Comments number</p>
                                             <h3 class="text-center">
-                                                <?= $comments['nb_comments'] ?>
+                                                <?= $data['nb_comments'] ?>
                                             </h3>
                                             <p class="text-center">Creation date</p>
                                             <h3 class="text-center">
@@ -63,8 +63,10 @@
                                             <div class="d-flex justify-content-center">
                                                 <a href="index.php?action=post&amp;id=<?= $data['id'] ?>"
                                                    class="btn btn-primary btn-sm mx-2">See</a>
-                                                <a href="" class="btn btn-warning btn-sm mx-2">Modify</a>
-                                                <a href="" class="delete-post btn btn-danger btn-sm mx-2">Delete</a>
+                                                <a href="index.php?action=modifyPostView&amp;id=<?= $data['id'] ?>"
+                                                   class="btn btn-warning btn-sm mx-2">Modify</a>
+                                                <a href="index.php?action=deletePost&amp;id=<?= $data['id'] ?>"
+                                                   class="delete-post btn btn-danger btn-sm mx-2">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -80,17 +82,6 @@
         </section>
 
     </div>
-
-    <form action="" method="post" class="p-5 bg-light">
-        <div class="form-group">
-            <label for="adminform">Comment</label><br/>
-            <textarea name="adminform" id="adminform" cols="30" rows="10" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Post a post" class="btn py-3 px-4 btn-primary">
-        </div>
-
-    </form>
 
 <?php $content = ob_get_clean(); ?>
 

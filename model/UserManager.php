@@ -14,7 +14,7 @@ class UserManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT username, password, role FROM user WHERE username = ? AND password = ?');
-        $req->execute(array($name, $password));
+        $req->execute([$name, $password]);
         return $req->fetch();
     }
 
@@ -23,7 +23,7 @@ class UserManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT role FROM user WHERE username = ? AND password = ?');
-        $req->execute(array($username, $password));
+        $req->execute([$username, $password]);
         return $req->fetch();
     }
 
@@ -32,7 +32,7 @@ class UserManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO user(username, password, created_at, role) VALUES (?, ?, NOW(), "user")');
-        $req->execute(array($username, $password));
+        $req->execute([$username, $password]);
 
         return $req;
     }
@@ -42,7 +42,7 @@ class UserManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id FROM user WHERE username = ?');
-        $req->execute(array($username));
+        $req->execute([$username]);
         $req->fetch();
 //        var_dump($req->fetch());
         return $req;

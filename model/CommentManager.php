@@ -2,8 +2,9 @@
 
 namespace Blog\model;
 
-// require_once 'model/Manager.php';
 use Blog\model\Comment;
+
+use PDO;
 
 class CommentManager extends Manager
 {
@@ -11,7 +12,7 @@ class CommentManager extends Manager
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
-        $comments->execute(array($postId));
+        $comments->execute([$postId]);
 
         return $comments;
     }
@@ -21,7 +22,7 @@ class CommentManager extends Manager
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($postId, $author, $comment));
+        $affectedLines = $comments->execute([$postId, $author, $comment]);
 
         return $affectedLines;
     }
@@ -41,7 +42,20 @@ class CommentManager extends Manager
         $comments = $db->prepare('SELECT COUNT(*) AS nb_comments FROM comments WHERE post_id = ?');
         $comments->execute([$postId]);
         $nbComments = $comments->fetch();
+
         return $nbComments;
+    }
+
+    public function getNbComment()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT COUNT(comments.id) AS nb_comments, posts.title AS post_title, posts.content AS post_content FROM comments
+            INNER JOIN posts ON comments.post_id=posts.id
+            GROUP BY comments.post_id');
+        $req->fetchAll();
+//        var_dump($req);
+
+        return $req;
     }
     // public function readOneComment($postId, $commentId)
     // {
