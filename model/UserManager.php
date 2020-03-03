@@ -36,15 +36,5 @@ class UserManager extends Manager
 
         return $req;
     }
-
-    // Check if the username is allready taken
-    public function matchUser($username)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id FROM user WHERE username = ?');
-        $req->execute([$username]);
-        $req->fetch();
-//        var_dump($req->fetch());
-        return $req;
-    }
+    
 }

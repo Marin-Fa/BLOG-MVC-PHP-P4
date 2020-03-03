@@ -115,9 +115,11 @@ class UserController
             $this->msg = 'Hello Admin';
             $_SESSION['username'] = $username;
             $_SESSION['role'] = 'admin';
-            $posts = $postManager->getPosts();
-            $comments = $commentManager->getNbComment();
-            require 'view/adminView.php';
+
+//            $posts = $postManager->getPosts();
+//            $comments = $commentManager->getNbComment();
+//            require 'view/adminView.php';
+            header('Location: index.php?action=showAdminPanel');
         } else {
             $posts = $postManager->getPosts();
             $this->role = 'user';

@@ -13,7 +13,7 @@ use Blog\controller\{
 
 Autoloader::register();
 session_start();
-var_dump($_SESSION['role']);
+//var_dump($_SESSION['role']);
 
 
 if (isset($_GET['action'])) {
