@@ -65,6 +65,9 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'deletePost') {
         $post = new PostController();
         $post->deletePost();
+    } elseif ($_GET['action'] == 'errorView') {
+        $post = new PostController();
+        $post->errorView();
     }
 } else {
     $post = new PostController();

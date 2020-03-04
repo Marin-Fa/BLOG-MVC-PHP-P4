@@ -42,7 +42,7 @@ class PostManager extends Manager
     {
         $db = $this->dbConnect();
         $updatePost = $db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
-        $updatePost->execute(array($title, $content, $postId));
+        $updatePost->execute([$title, $content, $postId]);
     }
 
     // DELETE a post

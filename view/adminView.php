@@ -32,6 +32,7 @@
                 <h2>Posts</h2>
                 <a href="" class="btn btn-primary">Manage comments</a>
                 <a href="index.php?action=createPostView" class="btn btn-primary">Create a post</a>
+                <a href="index.php?action=errorView" class="btn btn-primary">Error view</a>
             </div>
         </div>
 

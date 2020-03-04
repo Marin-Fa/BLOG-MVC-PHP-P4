@@ -20,7 +20,7 @@ class PostController
         $postManager = new PostManager();
         $posts = $postManager->getPosts();
         $this->msg = "Jean Forteroche";
-        $this->p = "Far far away, behind the mountains, far from the industrial wolrd, lives the peacefull place in the world.";
+        $this->p = "Far far away, behind the mountains, far from the industrial world, lives the peacefull place in the world.";
 
         require 'view/listPostsView.php';
     }
@@ -88,6 +88,7 @@ class PostController
         }
     }
 
+    // Update post
     public function modifyPost()
     {
         if (!empty($_POST['title']) && !empty($_POST['content'])) {
@@ -100,6 +101,12 @@ class PostController
             $this->msg = 'Something went wrong';
             require 'view/adminView.php';
         }
+    }
+
+    public function errorView()
+    {
+        $this->msg = 'Error';
+        require 'view/errorView.php';
     }
 
 }

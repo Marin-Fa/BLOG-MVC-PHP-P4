@@ -27,14 +27,14 @@ class CommentManager extends Manager
         return $affectedLines;
     }
 
-    public function getCommentsAdmin()
-    {
-        $db = $this->dbConnect();
-        $comments = $db->query('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments ORDER BY comment_date DESC');
-        $comments->execute();
-
-        return $comments;
-    }
+//    public function getCommentsAdmin()
+//    {
+//        $db = $this->dbConnect();
+//        $comments = $db->query('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments ORDER BY comment_date DESC');
+//        $comments->execute();
+//
+//        return $comments;
+//    }
 
     public function getNbComments($postId)
     {
@@ -42,6 +42,7 @@ class CommentManager extends Manager
         $comments = $db->prepare('SELECT COUNT(*) AS nb_comments FROM comments WHERE post_id = ?');
         $comments->execute([$postId]);
         $nbComments = $comments->fetch();
+//        var_dump($nbComments);
 
         return $nbComments;
     }
@@ -53,7 +54,6 @@ class CommentManager extends Manager
             INNER JOIN posts ON comments.post_id=posts.id
             GROUP BY comments.post_id');
         $req->fetchAll();
-//        var_dump($req);
 
         return $req;
     }

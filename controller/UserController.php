@@ -43,7 +43,8 @@ class UserController
         $postsList = new PostManager();
         $posts = $postsList->getPosts();
         $commentList = new CommentManager();
-        $comments = $commentList->getCommentsAdmin();
+        $comments = $commentList->getNbComments($_GET['id']);
+//        var_dump($comments);
         require 'view/adminView.php';
 
     }
@@ -102,7 +103,6 @@ class UserController
 
     public function welcome($username, $password)
     {
-        $commentManager = new CommentManager();
         $postManager = new PostManager();
         $userManager = new UserManager();
 
@@ -115,10 +115,6 @@ class UserController
             $this->msg = 'Hello Admin';
             $_SESSION['username'] = $username;
             $_SESSION['role'] = 'admin';
-
-//            $posts = $postManager->getPosts();
-//            $comments = $commentManager->getNbComment();
-//            require 'view/adminView.php';
             header('Location: index.php?action=showAdminPanel');
         } else {
             $posts = $postManager->getPosts();
