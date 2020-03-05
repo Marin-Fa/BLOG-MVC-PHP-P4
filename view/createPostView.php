@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="title">Title</label><br/>
                             <input type="text" name="title" id="title" cols="30" rows="10"
-                                   class="form-control text-center">
+                                   class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="content">Content</label><br/>

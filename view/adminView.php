@@ -29,10 +29,10 @@
     <div class="container">
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
-                <h2>Posts</h2>
+                <h2>Manage Posts</h2>
                 <a href="" class="btn btn-primary">Manage comments</a>
                 <a href="index.php?action=createPostView" class="btn btn-primary">Create a post</a>
-                <a href="index.php?action=errorView" class="btn btn-primary">Error view</a>
+                <a href="index.php?action=errorView" class="btn btn-primary">Test Display Error view</a>
             </div>
         </div>
 
@@ -42,39 +42,34 @@
                     <div class="col-md-12">
                         <div class="case">
                             <div class="row">
-                                <?php
-                                while ($data = $posts->fetch()) {
-                                    ?>
+                                <?php foreach ($comments as $comment) : ?>
                                     <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
                                         <div class="text w-100 pl-md-3">
                                             <p class="text-center">Title</p>
                                             <h3 class="text-center">
-                                                <?= htmlspecialchars($data['title']) ?>
+                                                <?= strip_tags($comment['title']) ?>
                                             </h3>
                                             <p class="text-center">Comments number</p>
                                             <h3 class="text-center">
-                                                <?= $data['nb_comments'] ?>
+                                                <?= $comment['nb_comments'] ?>
                                             </h3>
                                             <p class="text-center">Creation date</p>
                                             <h3 class="text-center">
-                                                <?= htmlspecialchars($data['creation_date_fr']) ?>
+                                                <?= strip_tags($comment['creation_date_fr']) ?>
                                             </h3>
                                             <br>
                                             <p class="text-center">Available options</p>
                                             <div class="d-flex justify-content-center">
-                                                <a href="index.php?action=post&amp;id=<?= $data['id'] ?>"
+                                                <a href="index.php?action=post&amp;id=<?= $comment['post_id'] ?>"
                                                    class="btn btn-primary btn-sm mx-2">See</a>
-                                                <a href="index.php?action=modifyPostView&amp;id=<?= $data['id'] ?>"
+                                                <a href="index.php?action=modifyPostView&amp;id=<?= $comment['post_id'] ?>"
                                                    class="btn btn-warning btn-sm mx-2">Modify</a>
-                                                <a href="index.php?action=deletePost&amp;id=<?= $data['id'] ?>"
+                                                <a href="index.php?action=deletePost&amp;id=<?= $comment['post_id'] ?>"
                                                    class="delete-post btn btn-danger btn-sm mx-2">Delete</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
-                                }
-                                $posts->closeCursor();
-                                ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>

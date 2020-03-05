@@ -47,13 +47,13 @@ class CommentManager extends Manager
         return $nbComments;
     }
 
-    public function getNbComment()
+    public function getNbCommentAdmin()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT COUNT(comments.id) AS nb_comments, posts.title AS post_title, posts.content AS post_content FROM comments
-            INNER JOIN posts ON comments.post_id=posts.id
+        $req = $db->query('SELECT COUNT(comments.id) AS nb_comments, posts.title AS title, posts.content AS content, posts.id AS post_id, posts.creation_date AS creation_date_fr FROM comments
+            INNER JOIN posts ON comments.post_id = posts.id
             GROUP BY comments.post_id');
-        $req->fetchAll();
+//        $req->fetchAll();
 
         return $req;
     }

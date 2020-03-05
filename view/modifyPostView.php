@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="title">Title</label><br/>
                             <input type="text" name="title" id="title" cols="30" rows="10"
-                                   class="form-control text-center" value="<?= $post['title'] ?>">
+                                   class="form-control" value="<?= $post['title'] ?>">
                         </div>
                         <div class="form-group">
                             <label for="adminform">Content</label><br/>

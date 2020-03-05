@@ -2,16 +2,20 @@
 
 namespace Blog\controller;
 
-use Blog\model\{
-    PostManager,
-    Post,
-    CommentManager
-};
+use Blog\model\{PostManager, Post, CommentManager, UserManager};
 
 class PostController
 {
     public $msg = "";
     public $p = "";
+    private $postManager;
+    private $commentManager;
+
+    public function __construct()
+    {
+        $this->postManager = new PostManager();
+        $this->commentManager = new CommentManager();
+    }
 
 
     // Display all posts
@@ -34,7 +38,7 @@ class PostController
             $post = $postManager->getPost($_GET['id']);
             $comments = $commentManager->getComments($_GET['id']);
             $nbComments = $commentManager->getNbComments($_GET['id']);
-            var_dump($nbComments);
+//            var_dump($nbComments);
         } else {
             throw new \Exception('Aucun identifiant de billet envoyé');
         }
@@ -96,10 +100,11 @@ class PostController
             $postManager = new PostManager();
             $post = $postManager->updatePost($_POST['title'], $_POST['content'], $_GET['id']);
             $this->msg = 'Update post';
-            require 'view/modifyPostView.php';
+            $comments = $this->commentManager->getNbCommentAdmin();
+            require 'view/adminView.php';
         } else {
             $this->msg = 'Something went wrong';
-            require 'view/adminView.php';
+            require 'view/modifyPostView.php';
         }
     }
 

@@ -40,11 +40,7 @@ class UserController
     public function showAdminPanel()
     {
         $this->msg = 'Hello Admin';
-        $postsList = new PostManager();
-        $posts = $postsList->getPosts();
-        $commentList = new CommentManager();
-        $comments = $commentList->getNbComments($_GET['id']);
-//        var_dump($comments);
+        $comments = $this->commentManager->getNbCommentAdmin();
         require 'view/adminView.php';
 
     }
@@ -70,7 +66,6 @@ class UserController
                 return;
             }
             if ($user) {
-                var_dump($user);
                 $this->msg = "Register";
                 $this->username_err = "This username is already taken.";
                 require 'view/registerView.php';
