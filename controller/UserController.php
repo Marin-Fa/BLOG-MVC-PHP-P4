@@ -45,6 +45,14 @@ class UserController
 
     }
 
+    public function showAdminCommentsView()
+    {
+        $this->msg = 'Manage Reported Comments';
+        $comments = $this->commentManager->getAdminComments();
+
+        require 'view/adminCommentsView.php';
+    }
+
     public function showRegisterPage()
     {
         $this->msg = "Register";
@@ -98,11 +106,8 @@ class UserController
 
     public function welcome($username, $password)
     {
-        $postManager = new PostManager();
-        $userManager = new UserManager();
-
-        $user = $userManager->getRole($username, $password);
-        if (!$userManager->getAuth($username, $password)) {
+        $user = $this->userManager->getRole($username, $password);
+        if (!$this->userManager->getAuth($username, $password)) {
             $this->msg = 'Something went wrong';
             require 'view/loginView.php';
         } elseif ($user['role'] === 'admin') {
@@ -112,7 +117,7 @@ class UserController
             $_SESSION['role'] = 'admin';
             header('Location: index.php?action=showAdminPanel');
         } else {
-            $posts = $postManager->getPosts();
+            $posts = $this->postManager->getPosts();
             $this->role = 'user';
             $this->msg = "Welcome";
             $this->p = $username;
@@ -126,8 +131,7 @@ class UserController
 
     public function logOut()
     {
-        $postManager = new PostManager();
-        $posts = $postManager->getPosts();
+        $posts = $this->postManager->getPosts();
         $this->msg = "See Ya";
         unset($_SESSION['username']);
         // Unset all of the session variables

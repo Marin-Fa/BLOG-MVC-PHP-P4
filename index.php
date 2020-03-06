@@ -68,6 +68,15 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'errorView') {
         $post = new PostController();
         $post->errorView();
+    } elseif ($_GET['action'] == 'reportComment') {
+        $comment = new CommentController();
+        $comment->reportComment();
+    } elseif ($_GET['action'] == 'showAdminCommentsView') {
+        $comment = new userController();
+        $comment->showAdminCommentsView();
+    } elseif ($_GET['action'] == 'supComment') {
+        $comment = new CommentController();
+        $comment->supComment();
     }
 } else {
     $post = new PostController();

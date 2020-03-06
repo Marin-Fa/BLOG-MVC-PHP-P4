@@ -21,8 +21,7 @@ class PostController
     // Display all posts
     public function listPosts()
     {
-        $postManager = new PostManager();
-        $posts = $postManager->getPosts();
+        $posts = $this->postManager->getPosts();
         $this->msg = "Jean Forteroche";
         $this->p = "Far far away, behind the mountains, far from the industrial world, lives the peacefull place in the world.";
 
@@ -33,11 +32,9 @@ class PostController
     public function post()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $postManager = new PostManager();
-            $commentManager = new CommentManager();
-            $post = $postManager->getPost($_GET['id']);
-            $comments = $commentManager->getComments($_GET['id']);
-            $nbComments = $commentManager->getNbComments($_GET['id']);
+            $post = $this->postManager->getPost($_GET['id']);
+            $comments = $this->commentManager->getComments($_GET['id']);
+            $nbComments = $this->commentManager->getNbComments($_GET['id']);
 //            var_dump($nbComments);
         } else {
             throw new \Exception('Aucun identifiant de billet envoyé');
@@ -55,8 +52,7 @@ class PostController
     public function modifyPostView()
     {
         $this->msg = 'Modify a Post';
-        $postManager = new PostManager();
-        $post = $postManager->getPost($_GET['id']);
+        $post = $this->postManager->getPost($_GET['id']);
         require 'view/modifyPostView.php';
     }
 
@@ -67,15 +63,14 @@ class PostController
                 'title' => $_POST['title'],
                 'content' => $_POST['content']]);
             var_dump($newPost);
-            $postManager = new PostManager();
-            $create = $postManager->createPost($newPost);
+            $create = $this->postManager->createPost($newPost);
             var_dump($create);
-            if ($postManager === false) {
+            if ($this->postManager === false) {
                 $this->msg = 'Cannot add post';
                 require 'view/createPostView.php';
             } else {
                 $this->msg = 'Post added !';
-                require 'view/adminView.php';
+                header('Location: index.php?action=showAdminPanel');
             }
         }
     }
@@ -84,11 +79,10 @@ class PostController
     public function deletePost()
     {
         if (htmlentities(isset($_GET['id']))) {
-            $postManager = new PostManager();
-            $posts = $postManager->getPosts();
-            $postManager->deletePost($_GET['id']);
+            $posts = $this->postManager->getPosts();
+            $this->postManager->deletePost($_GET['id']);
             $this->msg = 'Post has been deleted';
-            require 'view/adminView.php';
+            header('Location: index.php?action=showAdminPanel');
         }
     }
 
@@ -97,11 +91,10 @@ class PostController
     {
         if (!empty($_POST['title']) && !empty($_POST['content'])) {
 
-            $postManager = new PostManager();
-            $post = $postManager->updatePost($_POST['title'], $_POST['content'], $_GET['id']);
-            $this->msg = 'Update post';
+            $post = $this->postManager->updatePost($_POST['title'], $_POST['content'], $_GET['id']);
+            $this->msg = 'Post Updated';
             $comments = $this->commentManager->getNbCommentAdmin();
-            require 'view/adminView.php';
+            header('Location: index.php?action=showAdminPanel');
         } else {
             $this->msg = 'Something went wrong';
             require 'view/modifyPostView.php';

@@ -30,7 +30,7 @@
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h2>Manage Posts</h2>
-                <a href="" class="btn btn-primary">Manage comments</a>
+                <a href="index.php?action=showAdminCommentsView" class="btn btn-primary">Manage comments</a>
                 <a href="index.php?action=createPostView" class="btn btn-primary">Create a post</a>
                 <a href="index.php?action=errorView" class="btn btn-primary">Test Display Error view</a>
             </div>

@@ -3,21 +3,44 @@
 namespace Blog\controller;
 
 use Blog\model\CommentManager;
+use Blog\model\PostManager;
 
 class CommentController
 {
+    private $commentManager;
+    private $postManager;
+
+    public function __construct()
+    {
+        $this->postManager = new PostManager();
+        $this->commentManager = new CommentManager();
+    }
+
     public function addComment($postId, $author, $comment)
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                $commentManager = new CommentManager();
-                $comments = $commentManager->postComment($postId, $author, $comment);
+                $comments = $this->commentManager->postComment($postId, $author, $comment);
                 header('Location: index.php?action=post&id=' . $postId);
                 exit;
             } else {
                 echo 'You must fill in the form';
             }
         }
+    }
+
+    public function reportComment()
+    {
+        $this->commentManager->statusComment($_GET['id']);
+        require 'view/postView.php';
+    }
+
+    public function supComment()
+    {
+        $comments = $this->commentManager->getAdminComments();
+        $this->commentManager->deleteComment($_GET['id']);
+        $this->msg = 'Comment Deleted';
+        header('Location: index.php?action=showAdminCommentsView');
     }
     // public function oneComment($postId, $commentId)
     // {
