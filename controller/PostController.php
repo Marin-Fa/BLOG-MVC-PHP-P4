@@ -72,10 +72,10 @@ class PostController
 
             $this->post->setTitle($_POST['title']);
             $this->post->setContent($_POST['content']);
-//            $newPost = new Post([
-//                'title' => $_POST['title'],
-//                'content' => $_POST['content']]);
+//            $this->post->setId($_POST['id']);
+//            $this->post->setCreationDate($_POST['creation_date']);
             var_dump($this->post);
+
             $create = $this->postManager->createPost($this->post);
             var_dump($create);
             if ($this->postManager === false) {

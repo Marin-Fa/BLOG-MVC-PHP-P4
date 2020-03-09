@@ -29,13 +29,11 @@ class PostManager extends Manager
     public function createPost(Post $post)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO posts(title, content, creation_date, id) 
-            VALUES (?,?,NOW(), ?)');
+        $req = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES (?,?, NOW())');
         $req->execute([
-            'title' => $post->getTitle(),
-            'content' => $post->getContent(),
-            'creation_date' => $post->getCreationDate(),
-            'id' => $post->getId()]);
+            $post->getTitle(),
+            $post->getContent()
+        ]);
 
         return $req;
     }
