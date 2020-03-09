@@ -7,6 +7,7 @@ use Blog\model\PostManager;
 
 class CommentController
 {
+    public $p = "";
     private $commentManager;
     private $postManager;
 
@@ -31,8 +32,16 @@ class CommentController
 
     public function reportComment()
     {
-        $this->commentManager->statusComment($_GET['id']);
-        require 'view/postView.php';
+//        var_dump($_SESSION);
+        $post = $this->postManager->getPost($_GET['id']);
+        $comments = $this->commentManager->getComments($_GET['id']);
+        if ($_SESSION) {
+            $this->commentManager->updateStatusComment($_GET['id'], $_GET['post_id']);
+            header('Location: index.php?action=post&id=' . $post['id']);
+        } else {
+            $this->p = 'You are not logged in';
+            require 'view/errorView.php';
+        }
     }
 
     public function supComment()

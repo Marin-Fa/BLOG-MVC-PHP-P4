@@ -45,21 +45,9 @@
                             <?php foreach ($comments as $comment) : ?>
                                 <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
                                     <div class="text w-100 pl-md-3">
-                                        <p class="text-center">ID</p>
-                                        <h3 class="text-center">
-                                            <?= strip_tags($comment['id']) ?>
-                                        </h3>
                                         <p class="text-center">Author</p>
                                         <h3 class="text-center">
                                             <?= strip_tags($comment['author']) ?>
-                                        </h3>
-                                        <p class="text-center">Status</p>
-                                        <h3 class="text-center">
-                                            <?= $comment['status'] ?>
-                                        </h3>
-                                        <p class="text-center">Post ID</p>
-                                        <h3 class="text-center">
-                                            <?= $comment['post_id'] ?>
                                         </h3>
                                         <p class="text-center">Content</p>
                                         <h3 class="text-center">
@@ -68,6 +56,14 @@
                                         <p class="text-center">Creation date</p>
                                         <h3 class="text-center">
                                             <?= strip_tags($comment['comment_date_fr']) ?>
+                                        </h3>
+                                        <p class="text-center">Post ID</p>
+                                        <h3 class="text-center">
+                                            <?= $comment['post_id'] ?>
+                                        </h3>
+                                        <p class="text-center">Status</p>
+                                        <h3 class="text-center">
+                                            <?= $comment['status'] ?>
                                         </h3>
                                         <br>
                                         <p class="text-center">Available options</p>

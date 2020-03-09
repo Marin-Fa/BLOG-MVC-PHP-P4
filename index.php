@@ -77,6 +77,9 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'supComment') {
         $comment = new CommentController();
         $comment->supComment();
+    } elseif ($_GET['action'] == 'loginListPosts') {
+        $post = new PostController();
+        $post->loginListPosts();
     }
 } else {
     $post = new PostController();

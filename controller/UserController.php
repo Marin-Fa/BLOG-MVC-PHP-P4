@@ -125,7 +125,7 @@ class UserController
             $_SESSION['role'] = 'user';
             $this->username = $username;
             $this->password = $password;
-            header('Location: index.php');
+            header('Location: index.php?action=loginListPosts');
         }
     }
 

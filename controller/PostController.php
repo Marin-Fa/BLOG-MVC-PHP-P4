@@ -10,11 +10,13 @@ class PostController
     public $p = "";
     private $postManager;
     private $commentManager;
+    private $comment;
 
     public function __construct()
     {
         $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
+        $this->post = new Post();
     }
 
 
@@ -26,6 +28,14 @@ class PostController
         $this->p = "Far far away, behind the mountains, far from the industrial world, lives the peacefull place in the world.";
 
         require 'view/listPostsView.php';
+    }
+
+    public function loginListPosts()
+    {
+        $posts = $this->postManager->getPosts();
+        $this->msg = 'Welcome';
+        require 'view/listPostsView.php';
+
     }
 
     // Display one posts with it's comments
@@ -59,11 +69,14 @@ class PostController
     public function sendPost()
     {
         if (!empty($_POST['title']) && !empty($_POST['content']) && strlen(trim($_POST['title']))) {
-            $newPost = new Post([
-                'title' => $_POST['title'],
-                'content' => $_POST['content']]);
-            var_dump($newPost);
-            $create = $this->postManager->createPost($newPost);
+
+            $this->post->setTitle($_POST['title']);
+            $this->post->setContent($_POST['content']);
+//            $newPost = new Post([
+//                'title' => $_POST['title'],
+//                'content' => $_POST['content']]);
+            var_dump($this->post);
+            $create = $this->postManager->createPost($this->post);
             var_dump($create);
             if ($this->postManager === false) {
                 $this->msg = 'Cannot add post';

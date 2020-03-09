@@ -31,10 +31,13 @@ class PostManager extends Manager
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO posts(title, content, creation_date, id) 
             VALUES (?,?,NOW(), ?)');
-        $newPost = $req->execute([$post->getTitle(), $post->getContent(),
-            $post->getCreationDate(), $post->getId()]);
+        $req->execute([
+            'title' => $post->getTitle(),
+            'content' => $post->getContent(),
+            'creation_date' => $post->getCreationDate(),
+            'id' => $post->getId()]);
 
-        return $newPost;
+        return $req;
     }
 
     // UPDATE a post

@@ -20,7 +20,7 @@ class CommentManager extends Manager
     public function getAdminComments()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, author, comment, status, comment_date AS comment_date_fr, post_id FROM comments WHERE status = 1 ORDER BY comment_date DESC');
+        $req = $db->query('SELECT id, author, comment, status, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, post_id FROM comments WHERE status = 1 ORDER BY comment_date DESC');
 
         return $req;
 
@@ -56,12 +56,13 @@ class CommentManager extends Manager
         return $req;
     }
 
-    public function statusComment($commentId)
+    public function updateStatusComment($commentId, $postId)
     {
 
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = ?');
-        $newStatus = $req->execute([$commentId]);
+        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = ? AND post_id = ?');
+        $newStatus = $req->execute([$commentId, $postId]);
+        var_dump($newStatus);
         return $newStatus;
     }
 
