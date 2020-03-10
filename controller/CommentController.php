@@ -32,12 +32,11 @@ class CommentController
 
     public function reportComment()
     {
-//        var_dump($_SESSION);
-        $post = $this->postManager->getPost($_GET['id']);
-        $comments = $this->commentManager->getComments($_GET['id']);
         if ($_SESSION) {
-            $this->commentManager->updateStatusComment($_GET['id'], $_GET['post_id']);
-            header('Location: index.php?action=post&id=' . $post['id']);
+            $this->commentManager->getComment($_GET['id']);
+            $this->commentManager->updateStatusComment($_GET['id']);
+//            var_dump($_GET);
+            header('Location: index.php?action=post&id=' . $_GET['postId']);
         } else {
             $this->p = 'You are not logged in';
             require 'view/errorView.php';

@@ -8,7 +8,6 @@
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
                  data-scrollax-parent="true">
                 <div class="col-md-12 ftco-animate">
-                    <!-- <h2 class="subheading">Hello! Welcome to</h2> -->
                     <h1 class="mb-4 mb-md-0"><?= htmlspecialchars($post['title']) ?></h1>
                     <div class="row">
                         <div class="col-md-7">
@@ -32,8 +31,8 @@
             <div class="row">
                 <div class="col-lg-12 ftco-animate">
                     <em>le <?= $post['creation_date_fr'] ?></em>
-                    <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
-                    <p><a href="index.php">Retour à la liste des billets</a></p>
+                    <p><?= nl2br(($post['content'])) ?></p>
+                    <p><a href="index.php">Go back to list posts</a></p>
 
 
                     <h3 class="mb-5" id="comments">Comments</h3>
@@ -41,18 +40,15 @@
                     while ($comment = $comments->fetch()) {
                     ?>
                     <div class="pt-5 mt-5" id="comment_list">
-                        <!-- <h3 class="mb-5">Comments</h3> -->
                         <ul class="comment-list">
                             <li class="comment">
-                                <!-- <div class="vcard bio">
-                                    <img src="public/images/person_1.jpg" alt="Image placeholder">
-                                </div> -->
                                 <div class="comment-body">
                                     <h3><?= htmlspecialchars($comment['author']) ?></h3>
                                     <div class="meta mb-3"><?= $comment['comment_date_fr'] ?></div>
                                     <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
                                     <div class="form-group">
-                                        <a href="index.php?action=reportComment" class="btn btn-primary">Report</a>
+                                        <a href="index.php?action=reportComment&amp;id=<?= $comment['id'] ?>&amp;postId=<?= $comment['post_id'] ?>"
+                                           class="btn btn-primary">Report</a>
                                     </div>
                                 </div>
                             </li>

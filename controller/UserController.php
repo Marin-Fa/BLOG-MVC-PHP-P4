@@ -120,8 +120,8 @@ class UserController
             $posts = $this->postManager->getPosts();
             $this->role = 'user';
             $this->msg = "Welcome";
-            $this->p = $username;
             $_SESSION['username'] = $username;
+            $this->p = $username;
             $_SESSION['role'] = 'user';
             $this->username = $username;
             $this->password = $password;

@@ -11,7 +11,7 @@ class CommentManager extends Manager
     public function getComments($postId)
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('SELECT id, author, comment, status, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+        $comments = $db->prepare('SELECT id, post_id, author, comment, status, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
         $comments->execute([$postId]);
 
         return $comments;
@@ -36,6 +36,17 @@ class CommentManager extends Manager
         return $affectedLines;
     }
 
+    public function getComment($postId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT post_id FROM comments WHERE id = ?');
+        $req->execute([$postId]);
+        $req->fetch();
+//        var_dump($req);
+
+        return $req;
+    }
+
     public function getNbComments($postId)
     {
         $db = $this->dbConnect();
@@ -56,13 +67,13 @@ class CommentManager extends Manager
         return $req;
     }
 
-    public function updateStatusComment($commentId, $postId)
+    public function updateStatusComment($commentId)
     {
 
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = ? AND post_id = ?');
-        $newStatus = $req->execute([$commentId, $postId]);
-        var_dump($newStatus);
+        $req = $db->prepare('UPDATE comments SET status = 1 WHERE id = ?');
+        $newStatus = $req->execute([$commentId]);
+//        var_dump($newStatus);
         return $newStatus;
     }
 
@@ -72,15 +83,16 @@ class CommentManager extends Manager
         $deleteComment = $db->prepare('DELETE FROM comments WHERE id = ?');
         $deleteComment->execute([$commentId]);
     }
-    // public function readOneComment($postId, $commentId)
-    // {
-    //     $db = $this->dbConnect();
-    //     $comment = $db->prepare('SELECT id, author, comment, comment_date, post_id FROM comments WHERE post_id = ? AND id = ?');
-    //     $comment->execute(array($postId, $commentId));
-    //     $myComment = $comment->fetch();
 
-    //     return $myComment;
-    // }
+//    public function readOneComment($postId, $commentId)
+//    {
+//        $db = $this->dbConnect();
+//        $comment = $db->prepare('SELECT id, author, comment, comment_date, post_id FROM comments WHERE post_id = ? AND id = ?');
+//        $comment->execute(array($postId, $commentId));
+//        $myComment = $comment->fetch();
+//
+//        return $myComment;
+//    }
     // public function update($author, $comment, $postId, $id)
     // {
     //     var_dump($author, $comment, $postId, $id);

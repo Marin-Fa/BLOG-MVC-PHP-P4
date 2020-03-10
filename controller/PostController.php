@@ -11,6 +11,8 @@ class PostController
     private $postManager;
     private $commentManager;
     private $comment;
+    private $post;
+
 
     public function __construct()
     {
@@ -45,7 +47,6 @@ class PostController
             $post = $this->postManager->getPost($_GET['id']);
             $comments = $this->commentManager->getComments($_GET['id']);
             $nbComments = $this->commentManager->getNbComments($_GET['id']);
-//            var_dump($nbComments);
         } else {
             throw new \Exception('Aucun identifiant de billet envoyé');
         }
@@ -72,8 +73,6 @@ class PostController
 
             $this->post->setTitle($_POST['title']);
             $this->post->setContent($_POST['content']);
-//            $this->post->setId($_POST['id']);
-//            $this->post->setCreationDate($_POST['creation_date']);
             var_dump($this->post);
 
             $create = $this->postManager->createPost($this->post);
@@ -107,7 +106,7 @@ class PostController
             $post = $this->postManager->updatePost($_POST['title'], $_POST['content'], $_GET['id']);
             $this->msg = 'Post Updated';
             $comments = $this->commentManager->getNbCommentAdmin();
-            header('Location: index.php?action=showAdminPanel');
+            require 'view/adminView.php';
         } else {
             $this->msg = 'Something went wrong';
             require 'view/modifyPostView.php';
