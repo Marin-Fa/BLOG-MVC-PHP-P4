@@ -22,7 +22,7 @@ if (isset($_GET['action'])) {
         $post->post();
     } elseif ($_GET['action'] == 'addComment') {
         $comment = new CommentController();
-        $comment->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+        $comment->addComment($_GET['id']);
     } elseif ($_GET['action'] == 'showContactPage') {
         $message = new ContactController();
         $message->showContactPage();

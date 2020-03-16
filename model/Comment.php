@@ -66,7 +66,7 @@ class Comment
         return $this->_author;
     }
 
-    public function getCommentt(): string
+    public function getComment(): string
     {
         return $this->_comment;
     }

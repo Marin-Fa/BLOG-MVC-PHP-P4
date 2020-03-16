@@ -22,15 +22,16 @@ class CommentController
         $this->comment = new Comment();
     }
 
-    public function addComment($postId, $author, $comment)
+    public function addComment($postId)
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                $this->comment->setPostId($postId);
                 $this->comment->setAuthor($_POST['author']);
                 $this->comment->setComment($_POST['comment']);
                 var_dump($this->comment);
 
-                $comments = $this->commentManager->postComment($postId, $author, $comment);
+                $comments = $this->commentManager->createComment($this->comment);
                 header('Location: index.php?action=post&id=' . $postId);
                 exit;
             } else {
