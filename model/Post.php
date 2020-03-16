@@ -7,7 +7,7 @@ use DateTime;
 class Post
 {
 
-//    private $_id;
+    private $_id;
     private $_title;
     private $_content;
     private $_creation_date;
@@ -31,10 +31,11 @@ class Post
 //    }
 
     // SETTERS
-//    public function setId(int $id)
-//    {
-//        $this->_id = $id;
-//    }
+    public function setId(int $id)
+    {
+        $this->_id = $id;
+    }
+
     public function setTitle(string $postTitle)
     {
         $this->_title = $postTitle;
@@ -51,10 +52,10 @@ class Post
     }
 
     // GETTERS
-//    public function getId(): int
-//    {
-//        return $this->_id;
-//    }
+    public function getId(): int
+    {
+        return $this->_id;
+    }
 
     public function getTitle(): string
     {

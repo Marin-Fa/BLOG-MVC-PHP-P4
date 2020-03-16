@@ -2,25 +2,34 @@
 
 namespace Blog\controller;
 
-use Blog\model\CommentManager;
-use Blog\model\PostManager;
+use Blog\model\{
+    CommentManager,
+    Comment,
+    PostManager
+};
 
 class CommentController
 {
     public $p = "";
     private $commentManager;
     private $postManager;
+    private $comment;
 
     public function __construct()
     {
         $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
+        $this->comment = new Comment();
     }
 
     public function addComment($postId, $author, $comment)
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                $this->comment->setAuthor($_POST['author']);
+                $this->comment->setComment($_POST['comment']);
+                var_dump($this->comment);
+
                 $comments = $this->commentManager->postComment($postId, $author, $comment);
                 header('Location: index.php?action=post&id=' . $postId);
                 exit;

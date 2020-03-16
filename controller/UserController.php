@@ -91,7 +91,10 @@ class UserController
                 require 'view/registerView.php';
                 return;
             } else {
+//                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+//                $this->userManager->pushUserInfo($username, $hashedPassword);
                 $this->userManager->pushUserInfo($username, $password);
+
                 $this->msg = "Successful Registration";
                 require 'view/loginView.php';
             }

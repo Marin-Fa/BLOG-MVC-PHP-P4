@@ -2,7 +2,11 @@
 
 namespace Blog\controller;
 
-use Blog\model\{PostManager, Post, CommentManager, UserManager};
+use Blog\model\{
+    PostManager,
+    Post,
+    CommentManager
+};
 
 class PostController
 {
@@ -10,7 +14,6 @@ class PostController
     public $p = "";
     private $postManager;
     private $commentManager;
-    private $comment;
     private $post;
 
 
