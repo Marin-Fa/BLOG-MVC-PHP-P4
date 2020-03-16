@@ -28,7 +28,7 @@ if (isset($_GET['action'])) {
         $message->showContactPage();
     } elseif ($_GET['action'] == 'addMessage') {
         $message = new ContactController();
-        $message->addMessage($_POST['name'], $_POST['email'], $_POST['message']);
+        $message->addMessage();
     } elseif ($_GET['action'] == 'showRegisterPage') {
         $user = new UserController();
         $user->showRegisterPage();

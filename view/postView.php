@@ -9,6 +9,7 @@
                  data-scrollax-parent="true">
                 <div class="col-md-12 ftco-animate">
                     <h1 class="mb-4 mb-md-0"><?= htmlspecialchars($post['title']) ?></h1>
+                    <p><?= $this->p ?></p>
                     <div class="row">
                         <div class="col-md-7">
                             <div class="text">

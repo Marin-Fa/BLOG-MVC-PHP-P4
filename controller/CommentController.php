@@ -10,6 +10,7 @@ use Blog\model\{
 
 class CommentController
 {
+    public $msg = "";
     public $p = "";
     private $commentManager;
     private $postManager;
@@ -45,6 +46,7 @@ class CommentController
         if ($_SESSION) {
             $this->commentManager->getComment($_GET['id']);
             $this->commentManager->updateStatusComment($_GET['id']);
+            $this->p = 'Comment reported';
 //            var_dump($_GET);
             header('Location: index.php?action=post&id=' . $_GET['postId']);
         } else {

@@ -14,6 +14,22 @@ class ContactManager extends Manager
 
         return $messageInserted;
     }
+
+    // Post contact message
+    public function createMessage(Contact $contact)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO contact(name, email, message, date) VALUES (?, ?, ?, NOW())');
+        $req->execute([
+            $contact->getName(),
+            $contact->getEmail(),
+            $contact->getMessage()
+        ]);
+
+        return $req;
+    }
+
+
     // public function getMessages()
     // {
     //     $db = $this->dbConnect();
