@@ -58,24 +58,32 @@
                             ?>
                             <!-- END comment-list -->
 
+                            <?php if ($_SESSION): ?>
                             <div class="comment-form-wrap pt-5">
                                 <h3 class="mb-5">Leave a comment</h3>
-
                                 <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post"
                                       class="p-5 bg-light">
                                     <div class="form-group">
                                         <label for="author">Author</label><br/>
-                                        <input type="text" id="author" name="author"/>
+                                        <?php if (isset($_SESSION['username']) and !empty($_SESSION['username'])): ?>
+                                            <input type="text" id="author" name="author"
+                                                   value="<?= $_SESSION['username'] ?>" readonly="readonly"">
+                                        <?php else: ?>
+                                        <input type="text" id="author" name="author">
                                     </div>
-                                    <div class="form-group">
+                                    <?php endif ?>
+                                    <?php endif ?>
+                                    <div class="form-group <?= $this->comment_err ? 'has-error' : ''; ?>">
                                         <label for="comment">Comment</label><br/>
                                         <textarea name="comment" id="comment" cols="30" rows="10"
-                                                  class="form-control"></textarea>
+                                                  class="form-control"
+                                        ></textarea>
+                                        <span class="help-block"><?= $this->comment_err; ?></span>
                                     </div>
                                     <div class="form-group">
-                                        <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                                        <input type="submit" name="submit" value="Submit"
+                                               class="btn py-3 px-4 btn-primary">
                                     </div>
-
                                 </form>
                             </div>
 

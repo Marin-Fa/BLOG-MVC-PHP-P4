@@ -12,6 +12,7 @@ class CommentController
 {
     public $msg = "";
     public $p = "";
+    public $comment_err = "";
     private $commentManager;
     private $postManager;
     private $comment;
@@ -25,17 +26,21 @@ class CommentController
 
     public function addComment($postId)
     {
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
-            if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                $this->comment->setPostId($postId);
-                $this->comment->setAuthor($_POST['author']);
-                $this->comment->setComment($_POST['comment']);
-//                var_dump($this->comment);
-                $comments = $this->commentManager->createComment($this->comment);
-                header('Location: index.php?action=post&id=' . $postId);
-                exit;
-            } else {
-                echo 'You must fill in the form';
+        if (isset($_POST['submit'])) {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                    $this->comment->setPostId($postId);
+                    $this->comment->setAuthor($_POST['author']);
+                    $this->comment->setComment($_POST['comment']);
+                    var_dump($this->comment);
+                    $comments = $this->commentManager->createComment($this->comment);
+                    header('Location: index.php?action=post&id=' . $postId);
+                } else {
+                    $post = $this->postManager->getPost($_GET['id']);
+                    $comments = $this->commentManager->getComments($_GET['id']);
+                    $this->comment_err = "You must fill in the form";
+                    require 'view/postView.php';
+                }
             }
         }
     }

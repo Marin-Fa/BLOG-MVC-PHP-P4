@@ -45,8 +45,10 @@ class UserController
     {
         $this->msg = 'Hello Admin';
         $comments = $this->commentManager->getNbCommentAdmin();
-        require 'view/adminView.php';
-
+        var_dump($comments);
+        if (strlen($comments >= 0)) {
+            require 'view/adminView.php';
+        }
     }
 
     public function showAdminCommentsView()
@@ -68,7 +70,7 @@ class UserController
         $this->username = $username;
         // Processing form data when form is submitted
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $user = $this->userManager->getAuth($_POST['username'], $_POST['password']);
+            $user = $this->userManager->getAuth($_POST['username']);
             if (empty(trim($_POST["username"])) || empty(trim($_POST["password"])) || empty(trim($_POST["confirm_password"]))) {
                 $this->username_err = "Please enter a username.";
                 $this->password_err = "Please enter a password.";

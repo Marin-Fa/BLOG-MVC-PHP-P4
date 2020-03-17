@@ -12,6 +12,7 @@ class PostController
 {
     public $msg = "";
     public $p = "";
+    public $comment_err = "";
     private $postManager;
     private $commentManager;
     private $post;
