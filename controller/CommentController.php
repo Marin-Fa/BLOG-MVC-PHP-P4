@@ -30,8 +30,7 @@ class CommentController
                 $this->comment->setPostId($postId);
                 $this->comment->setAuthor($_POST['author']);
                 $this->comment->setComment($_POST['comment']);
-                var_dump($this->comment);
-
+//                var_dump($this->comment);
                 $comments = $this->commentManager->createComment($this->comment);
                 header('Location: index.php?action=post&id=' . $postId);
                 exit;

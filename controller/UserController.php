@@ -5,7 +5,8 @@ namespace Blog\controller;
 use Blog\model\{
     CommentManager,
     PostManager,
-    UserManager
+    UserManager,
+    User
 };
 
 class UserController
@@ -20,15 +21,18 @@ class UserController
     public $password_err = "";
     public $confirm_password_err = "";
     public $id = "";
+
     private $userManager;
     private $postManager;
     private $commentManager;
+    private $user;
 
     public function __construct()
     {
         $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
         $this->userManager = new UserManager();
+        $this->user = new User();
     }
 
     public function showLoginAdminPanel()
@@ -91,9 +95,12 @@ class UserController
                 require 'view/registerView.php';
                 return;
             } else {
-//                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-//                $this->userManager->pushUserInfo($username, $hashedPassword);
-                $this->userManager->pushUserInfo($username, $password);
+                $hash_pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                var_dump($hash_pwd);
+                $this->user->setUsername($_POST['username']);
+                $this->user->setPassword($hash_pwd);
+//                var_dump($this->user);
+                $this->userManager->addUser($this->user);
 
                 $this->msg = "Successful Registration";
                 require 'view/loginView.php';
@@ -109,30 +116,51 @@ class UserController
 
     public function welcome($username, $password)
     {
-        $user = $this->userManager->getRole($username, $password);
-        if (!$this->userManager->getAuth($username, $password)) {
-            $this->msg = 'Something went wrong';
-            require 'view/loginView.php';
-        } elseif ($user['role'] === 'admin') {
-            $this->role = 'admin';
-            $this->msg = 'Hello Admin';
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = 'admin';
-            header('Location: index.php?action=showAdminPanel');
-        } else {
-            $posts = $this->postManager->getPosts();
-            $this->role = 'user';
-            $this->msg = "Welcome";
-            $_SESSION['username'] = $username;
-            $this->p = $username;
-            $_SESSION['role'] = 'user';
-            $this->username = $username;
-            $this->password = $password;
-            header('Location: index.php?action=loginListPosts');
+        if (isset($_POST['submit'])) {
+            if (!empty($_POST['username']) && !empty($_POST['password'])) {
+                $user = $this->userManager->getAuth($username);
+                if (!$user) {
+                    $this->msg = 'Something went wrong';
+                    require 'view/loginView.php';
+                    // This works
+                } else {
+                    $userRole = $this->userManager->getRole($username, $password);
+                    $pwdChecked = password_verify($_POST['password'], $user['password']);
+//                    var_dump($userRole); // false
+//                    var_dump($user); // Everything ok
+                    if ($pwdChecked) {
+                        var_dump($pwdChecked); // true
+                        if ($user['role'] === 'admin') {
+                            var_dump($user['role']);
+                            $this->role = 'admin';
+                            $this->msg = 'Hello Admin';
+                            $_SESSION['username'] = $username;
+                            $_SESSION['role'] = 'admin';
+                            header('Location: index.php?action=showAdminPanel');
+                        } elseif ($user['role'] === 'user') {
+                            $posts = $this->postManager->getPosts();
+                            $this->role = 'user';
+                            $this->msg = "Welcome";
+                            $_SESSION['username'] = $username;
+                            $this->p = $username;
+                            $_SESSION['role'] = 'user';
+                            $this->username = $username;
+                            $this->password = $password;
+                            header('Location: index.php?action=loginListPosts');
+                        } else {
+                            $this->msg = 'Login...';
+                            $this->p = 'Please fill in the form';
+
+                        }
+                    }
+                    require 'view/loginView.php';
+                }
+            }
         }
     }
 
-    public function logOut()
+    public
+    function logOut()
     {
         $posts = $this->postManager->getPosts();
         $this->msg = "See Ya";

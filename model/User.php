@@ -13,22 +13,22 @@ class User
     private $_created_at;
 
     // Constructor
-    public function __construct(array $donnees)
-    {
-        $this->hydrate($donnees);
-    }
-
-    // Method hydratation
-    public function hydrate(array $donnees)
-    {
-        foreach ($donnees as $key => $value) {
-            $method = 'set' . ucfirst($key);
-
-            if (method_exists($this, $method)) {
-                $this->$method($value);
-            }
-        }
-    }
+//    public function __construct(array $donnees)
+//    {
+//        $this->hydrate($donnees);
+//    }
+//
+//    // Method hydratation
+//    public function hydrate(array $donnees)
+//    {
+//        foreach ($donnees as $key => $value) {
+//            $method = 'set' . ucfirst($key);
+//
+//            if (method_exists($this, $method)) {
+//                $this->$method($value);
+//            }
+//        }
+//    }
 
     // SETTERS
     public function setId(int $id)

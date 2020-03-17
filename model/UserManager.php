@@ -10,11 +10,11 @@ use PDO;
 class UserManager extends Manager
 {
     // Matching username and password
-    public function getAuth($name, $password)
+    public function getAuth($name)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT username, password, role FROM user WHERE username = ? AND password = ?');
-        $req->execute([$name, $password]);
+        $req = $db->prepare('SELECT username, password, role FROM user WHERE username = ?');
+        $req->execute([$name]);
         return $req->fetch();
     }
 
@@ -36,5 +36,17 @@ class UserManager extends Manager
 
         return $req;
     }
-    
+
+    public function addUser(User $user)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO user(username, password, created_at, role) VALUES (?, ?, NOW(), "user")');
+        $req->execute([
+            $user->getUsername(),
+            $user->getPassword(),
+        ]);
+
+        return $req;
+    }
+
 }

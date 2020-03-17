@@ -76,10 +76,8 @@ class PostController
 
             $this->post->setTitle($_POST['title']);
             $this->post->setContent($_POST['content']);
-            var_dump($this->post);
-
-            $create = $this->postManager->createPost($this->post);
-            var_dump($create);
+//            var_dump($this->post);
+            $this->postManager->createPost($this->post);
             if ($this->postManager === false) {
                 $this->msg = 'Cannot add post';
                 require 'view/createPostView.php';
