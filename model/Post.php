@@ -11,6 +11,7 @@ class Post
     private $_title;
     private $_content;
     private $_creation_date;
+    private $_picture;
 
     // Constructor
 //    public function __construct(array $donnees)
@@ -51,6 +52,11 @@ class Post
         $this->_creation_date = new DateTime($creationDate);
     }
 
+    public function setPicture($picture)
+    {
+        $this->_picture = $picture;
+    }
+
     // GETTERS
     public function getId(): int
     {
@@ -70,5 +76,10 @@ class Post
     public function getCreationDate()
     {
         return $this->_creation_date;
+    }
+
+    public function getPicture()
+    {
+        return $this->_picture;
     }
 }

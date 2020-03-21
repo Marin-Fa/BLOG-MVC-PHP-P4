@@ -13,6 +13,7 @@ class Comment
     private $_author;
     private $_comment;
     private $_comment_date;
+    private $_id_user;
 
     // SETTERS
     public function setId(int $id)
@@ -45,6 +46,11 @@ class Comment
         $this->_comment_date = new DateTime($commentDate);
     }
 
+    public function setIdUser(int $idUser)
+    {
+        $this->_id_user = $idUser;
+    }
+
     // GETTERS
     public function getId(): int
     {
@@ -74,5 +80,10 @@ class Comment
     public function getCommentDate()
     {
         return $this->_comment_date;
+    }
+
+    public function getIdUser(): int
+    {
+        return $this->_id_user;
     }
 }
