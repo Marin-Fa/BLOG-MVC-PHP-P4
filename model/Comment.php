@@ -15,6 +15,22 @@ class Comment
     private $_comment_date;
     private $_id_user;
 
+    public function __construct($value = array())
+    {
+        if (!empty($value))
+            $this->hydrate($value);
+    }
+
+    public function hydrate($data)
+    {
+        foreach ($data as $attribut => $value) {
+            $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $attribut)));
+            if (is_callable(array($this, $method))) {
+                $this->$method($value);
+            }
+        }
+    }
+
     // SETTERS
     public function setId(int $id)
     {
@@ -87,3 +103,7 @@ class Comment
         return $this->_id_user;
     }
 }
+
+//$comment = new Comment(["author" => "Hortense", "comment" => "You're gonna enjoy php"]);
+//$new_values = ["author" => "Mom", "comment" => "What is php?"];
+//$comment->hydrate($new_values);

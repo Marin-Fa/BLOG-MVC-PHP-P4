@@ -67,7 +67,7 @@
                                         <label for="author">Author</label><br/>
                                         <?php if (isset($_SESSION['username']) and !empty($_SESSION['username'])): ?>
                                             <input type="text" id="author" name="author"
-                                                   value="<?= $_SESSION['username'] ?>" readonly="readonly"">
+                                                   value="<?= $_SESSION['username'] ?>" readonly="readonly">
                                         <?php else: ?>
                                         <input type="text" id="author" name="author">
                                     </div>

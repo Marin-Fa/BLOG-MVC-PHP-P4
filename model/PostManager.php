@@ -11,7 +11,6 @@ class PostManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 10');
-//        $posts = new Post();
         return $req;
     }
 
@@ -22,19 +21,18 @@ class PostManager extends Manager
         $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts WHERE id = ?');
         $req->execute([$postId]);
         $post = $req->fetch();
-
         return $post;
     }
 
     public function createPost(Post $post)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES (?,?, NOW())');
+        $req = $db->prepare('INSERT INTO posts(title, content, creation_date, picture) VALUES (?,?,NOW(),?)');
         $req->execute([
             $post->getTitle(),
-            $post->getContent()
+            $post->getContent(),
+            $post->getPicture()
         ]);
-
         return $req;
     }
 

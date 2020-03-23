@@ -13,7 +13,7 @@ class UserManager extends Manager
     public function getAuth($name)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT username, password, role FROM user WHERE username = ?');
+        $req = $db->prepare('SELECT id, username, password, role FROM user WHERE username = ?');
         $req->execute([$name]);
         return $req->fetch();
     }
@@ -33,7 +33,6 @@ class UserManager extends Manager
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO user(username, password, created_at, role) VALUES (?, ?, NOW(), "user")');
         $req->execute([$username, $password]);
-
         return $req;
     }
 
@@ -45,7 +44,6 @@ class UserManager extends Manager
             $user->getUsername(),
             $user->getPassword(),
         ]);
-
         return $req;
     }
 

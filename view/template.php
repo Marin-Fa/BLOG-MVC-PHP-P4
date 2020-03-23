@@ -46,19 +46,16 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="index.php?action=showContactPage" class="nav-link">Contact</a></li>
-                <?php if (!$_SESSION) { ?>
+                <?php if (!isset ($_SESSION['username'])) { ?>
                     <li class="nav-item"><a href="index.php?action=showRegisterPage" class="nav-link">Login</a></li>
-                <?php } elseif ($_SESSION['username']) { ?>
+                <?php } else { ?>
                     <li class="nav-item"><a href="index.php?action=logOut" class="nav-link">Logout</a></li>
-                    <?php ?>
                     <?php if ($_SESSION['role'] === 'admin') { ?>
                         <li class="nav-item"><a href="index.php?action=showAdminPanel" class="nav-link">Admin</a></li>
-                    <?php } elseif ($_SESSION['role'] === 'user') { ?>
+                    <?php } else { ?>
                         <li class="nav-item"><a href="index.php" class="nav-link"></a></li>
                     <?php } ?>
                 <?php } ?>
-
-
             </ul>
         </div>
     </div>
