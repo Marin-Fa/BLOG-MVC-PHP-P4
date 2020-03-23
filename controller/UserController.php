@@ -61,10 +61,15 @@ class UserController
     {
         $this->username = $username;
         // Processing form data when form is submitted
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['submit'])) {
             $user = $this->userManager->getAuth($_POST['username']);
-            if (empty(trim($_POST["username"])) || empty(trim($_POST["password"])) || empty(trim($_POST["confirm_password"]))) {
+            if (empty(trim($_POST["username"]))) {
                 $this->username_err = "Please enter a username.";
+                $this->msg = "Register";
+                require 'view/registerView.php';
+                return;
+            }
+            if (empty(trim($_POST["password"])) || empty(trim($_POST["confirm_password"]))) {
                 $this->password_err = "Please enter a password.";
                 $this->confirm_password_err = "Please confirm password.";
                 $this->msg = "Register";
@@ -109,46 +114,54 @@ class UserController
     public function welcome($username, $password)
     {
         if (isset($_POST['submit'])) {
-            if (!empty($_POST['username']) && !empty($_POST['password'])) {
-                $user = $this->userManager->getAuth($username);
-//                var_dump($user);
-                if (!$user) {
-                    $this->msg = 'Something went wrong';
-                    require 'view/loginView.php';
-                    // This works
+            $user = $this->userManager->getAuth($username);
+            $pwdChecked = password_verify($_POST['password'], $user['password']);
+            if (empty(trim($_POST["username"]))) {
+                $this->username_err = "Please enter a username.";
+                $this->msg = "Login...";
+                require 'view/loginView.php';
+                return;
+            }
+            if (empty(trim($_POST["password"]))) {
+                $this->password_err = "Please enter a password.";
+                $this->msg = "Login...";
+                require 'view/loginView.php';
+                return;
+            }
+            if (!$user) {
+                $this->msg = 'Something went wrong';
+                require 'view/loginView.php';
+            }
+            if (!$pwdChecked) {
+                $this->password_err = "Password did not match.";
+                $this->msg = "Login...";
+                require 'view/loginView.php';
+                return;
+            } else {
+                $_SESSION['user_id'] = $user['id'];
+                if ($user['role'] === 'admin') {
+                    var_dump($user['role']);
+                    $this->role = 'admin';
+                    $this->msg = 'Hello Admin';
+                    $_SESSION['username'] = $username;
+                    $_SESSION['role'] = 'admin';
+                    header('Location: index.php?action=showAdminPanel');
+                } elseif ($user['role'] === 'user') {
+                    $posts = $this->postManager->getPosts();
+                    $this->role = 'user';
+                    $this->msg = "Welcome";
+                    $_SESSION['username'] = $username;
+                    $this->p = $username;
+                    $_SESSION['role'] = 'user';
+                    $this->username = $username;
+                    $this->password = $password;
+                    header('Location: index.php?action=loginListPosts');
                 } else {
-//                    $userRole = $this->userManager->getRole($username, $password);
-                    $pwdChecked = password_verify($_POST['password'], $user['password']);
-                    //                    var_dump($userRole); // false
-                    //                    var_dump($user); // Everything ok
-                    if ($pwdChecked) {
-                        $_SESSION['user_id'] = $user['id'];
-                        var_dump($pwdChecked); // true
-                        var_dump($user['id']);
-                        if ($user['role'] === 'admin') {
-                            var_dump($user['role']);
-                            $this->role = 'admin';
-                            $this->msg = 'Hello Admin';
-                            $_SESSION['username'] = $username;
-                            $_SESSION['role'] = 'admin';
-                            header('Location: index.php?action=showAdminPanel');
-                        } elseif ($user['role'] === 'user') {
-                            $posts = $this->postManager->getPosts();
-                            $this->role = 'user';
-                            $this->msg = "Welcome";
-                            $_SESSION['username'] = $username;
-                            $this->p = $username;
-                            $_SESSION['role'] = 'user';
-                            $this->username = $username;
-                            $this->password = $password;
-                            header('Location: index.php?action=loginListPosts');
-                        } else {
-                            $this->msg = 'Login...';
-                            $this->p = 'Please fill in the form';
-                        }
-                    }
-                    require 'view/loginView.php';
+                    $this->msg = 'Login...';
+                    $this->p = 'Please fill in the form';
                 }
+
+                require 'view/loginView.php';
             }
         }
     }

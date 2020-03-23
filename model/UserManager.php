@@ -28,14 +28,6 @@ class UserManager extends Manager
     }
 
     // Insert a new user with role = user
-    public function pushUserInfo($username, $password)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO user(username, password, created_at, role) VALUES (?, ?, NOW(), "user")');
-        $req->execute([$username, $password]);
-        return $req;
-    }
-
     public function addUser(User $user)
     {
         $db = $this->dbConnect();

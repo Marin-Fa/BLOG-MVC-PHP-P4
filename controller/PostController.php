@@ -57,6 +57,7 @@ class PostController
             $post = $this->postManager->getPost($_GET['id']);
             $comments = $this->commentManager->getComments($_GET['id']);
             $nbComments = $this->commentManager->getNbComments($_GET['id']);
+            $this->p = '';
         } else {
             throw new \Exception('Aucun identifiant de billet envoyé');
         }

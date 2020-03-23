@@ -32,15 +32,15 @@
         <div class="container col-md-4">
             <p>Please fill in your credentials to login.</p>
             <form action="index.php?action=welcome" method="post" class="bg-light p-4 p-md-5 contact-form">
-                <div class="form-group">
+                <div class="form-group <?= $this->username_err ? 'has-error' : ''; ?>">
                     <label>Username</label>
-                    <input type="text" name="username" class="form-control" value="">
-                    <span class="help-block"></span>
+                    <input type="text" name="username" class="form-control" value="<?= $this->username; ?>">
+                    <span class="help-block"><?= $this->username_err; ?></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group <?= $this->password_err ? 'has-error' : ''; ?>">
                     <label>Password</label>
-                    <input type="password" name="password" class="form-control" value="">
-                    <span class="help-block"></span>
+                    <input type="password" name="password" class="form-control" value="<?= $this->password; ?>">
+                    <span class="help-block"><?= $this->password_err; ?></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" name="submit" class="btn btn-primary py-3 px-5" value="submit">
