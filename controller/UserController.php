@@ -35,20 +35,12 @@ class UserController
         $this->user = new User();
     }
 
-    public function showLoginAdminPanel()
-    {
-        $this->msg = 'Login Admin';
-        require 'view/adminLoginView.php';
-    }
-
     public function showAdminPanel()
     {
         $this->msg = 'Hello Admin';
         $comments = $this->commentManager->getNbCommentAdmin();
-        var_dump($comments);
-        if (strlen($comments >= 0)) {
-            require 'view/adminView.php';
-        }
+
+        require 'view/adminView.php';
     }
 
     public function showAdminCommentsView()
@@ -98,10 +90,8 @@ class UserController
                 return;
             } else {
                 $hash_pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                var_dump($hash_pwd);
                 $this->user->setUsername($_POST['username']);
                 $this->user->setPassword($hash_pwd);
-//                var_dump($this->user);
                 $this->userManager->addUser($this->user);
 
                 $this->msg = "Successful Registration";
@@ -121,17 +111,20 @@ class UserController
         if (isset($_POST['submit'])) {
             if (!empty($_POST['username']) && !empty($_POST['password'])) {
                 $user = $this->userManager->getAuth($username);
+//                var_dump($user);
                 if (!$user) {
                     $this->msg = 'Something went wrong';
                     require 'view/loginView.php';
                     // This works
                 } else {
-                    $userRole = $this->userManager->getRole($username, $password);
+//                    $userRole = $this->userManager->getRole($username, $password);
                     $pwdChecked = password_verify($_POST['password'], $user['password']);
-//                    var_dump($userRole); // false
-//                    var_dump($user); // Everything ok
+                    //                    var_dump($userRole); // false
+                    //                    var_dump($user); // Everything ok
                     if ($pwdChecked) {
+                        $_SESSION['user_id'] = $user['id'];
                         var_dump($pwdChecked); // true
+                        var_dump($user['id']);
                         if ($user['role'] === 'admin') {
                             var_dump($user['role']);
                             $this->role = 'admin';
@@ -152,7 +145,6 @@ class UserController
                         } else {
                             $this->msg = 'Login...';
                             $this->p = 'Please fill in the form';
-
                         }
                     }
                     require 'view/loginView.php';

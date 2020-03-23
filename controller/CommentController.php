@@ -5,7 +5,9 @@ namespace Blog\controller;
 use Blog\model\{
     CommentManager,
     Comment,
-    PostManager
+    PostManager,
+    User,
+    UserManager
 };
 
 class CommentController
@@ -15,12 +17,14 @@ class CommentController
     public $comment_err = "";
     private $commentManager;
     private $postManager;
+    private $userManager;
     private $comment;
 
     public function __construct()
     {
         $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
+        $this->userManager = new UserManager();
         $this->comment = new Comment();
     }
 
@@ -32,6 +36,7 @@ class CommentController
                     $this->comment->setPostId($postId);
                     $this->comment->setAuthor($_POST['author']);
                     $this->comment->setComment($_POST['comment']);
+                    $this->comment->setIdUser((int)$_SESSION['user_id']);
                     var_dump($this->comment);
                     $comments = $this->commentManager->createComment($this->comment);
                     header('Location: index.php?action=post&id=' . $postId);

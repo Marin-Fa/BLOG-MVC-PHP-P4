@@ -5,7 +5,8 @@ namespace Blog\controller;
 use Blog\model\{
     PostManager,
     Post,
-    CommentManager
+    CommentManager,
+    UserManager
 };
 
 class PostController
@@ -17,11 +18,14 @@ class PostController
     private $commentManager;
     private $post;
 
+//    private $userManager;
+
 
     public function __construct()
     {
         $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
+//        $this->userManager = new UserManager();
         $this->post = new Post();
     }
 
@@ -39,7 +43,9 @@ class PostController
     public function loginListPosts()
     {
         $posts = $this->postManager->getPosts();
+//        $user = $this->userManager->getAuth($_POST['username']);
         $this->msg = 'Welcome';
+        $this->p = $_SESSION['username'];
         require 'view/listPostsView.php';
 
     }
