@@ -9,7 +9,7 @@
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
                  data-scrollax-parent="true">
                 <div class="col-md-12 ftco-animate">
-                    <h1 class="mb-4 mb-md-0"><?= $this->msg ?></h1>
+                    <h2 class="mb-4 mb-md-0"><?= $this->msg ?></h2>
                     <div class="row">
                         <div class="col-md-7">
                             <div class="text">
@@ -29,7 +29,7 @@
     <div class="container">
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
-                <h2>Manage Posts</h2>
+                <h3>Manage Posts</h3>
                 <a href="index.php?action=showAdminCommentsView" class="btn btn-primary">Reported comments</a>
                 <a href="index.php?action=createPostView" class="btn btn-primary">Create a post</a>
                 <!--                <a href="index.php?action=errorView" class="btn btn-primary">Test Display Error view</a>-->
@@ -46,17 +46,17 @@
                                     <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
                                         <div class="text w-100 pl-md-3">
                                             <p class="text-center">Title</p>
-                                            <h3 class="text-center">
+                                            <h4 class="text-center">
                                                 <?= strip_tags($comment['title']) ?>
-                                            </h3>
+                                            </h4>
                                             <p class="text-center">Comments number</p>
-                                            <h3 class="text-center">
+                                            <h4 class="text-center">
                                                 <?= $comment['nb_comments'] ?>
-                                            </h3>
+                                            </h4>
                                             <p class="text-center">Creation date</p>
-                                            <h3 class="text-center">
+                                            <h4 class="text-center">
                                                 <?= strip_tags($comment['creation_date_fr']) ?>
-                                            </h3>
+                                            </h4>
                                             <br>
                                             <p class="text-center">Available options</p>
                                             <div class="d-flex justify-content-center">

@@ -18,15 +18,6 @@ class UserManager extends Manager
         return $req->fetch();
     }
 
-    // Get role admin/user
-    public function getRole($username, $password)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT role FROM user WHERE username = ? AND password = ?');
-        $req->execute([$username, $password]);
-        return $req->fetch();
-    }
-
     // Insert a new user with role = user
     public function addUser(User $user)
     {

@@ -9,7 +9,7 @@
                  data-scrollax-parent="true">
                 <div class="col-md-12 ftco-animate">
                     <?php if ($this->msg) : ?>
-                        <h1 id="contact_header" class="mb-4 mb-md-0"><?= $this->msg ?></h1>
+                        <h2 id="contact_header" class="mb-4 mb-md-0"><?= $this->msg ?></h2>
                     <?php endif ?>
                     <div class="row">
                         <div class="col-md-7">

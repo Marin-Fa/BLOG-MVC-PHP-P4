@@ -8,7 +8,7 @@
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
                  data-scrollax-parent="true">
                 <div class="col-md-12 ftco-animate">
-                    <h1 class="mb-4 mb-md-0"><?= htmlspecialchars($post['title']) ?></h1>
+                    <h2 class="mb-4 mb-md-0"><?= htmlspecialchars($post['title']) ?></h2>
                     <p><?= $this->p ?></p>
                     <div class="row">
                         <div class="col-md-7">

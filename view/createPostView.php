@@ -9,7 +9,7 @@
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
                  data-scrollax-parent="true">
                 <div class="col-md-12 ftco-animate">
-                    <h1 class="mb-4 mb-md-0"><?= $this->msg ?></h1>
+                    <h2 class="mb-4 mb-md-0"><?= $this->msg ?></h2>
                     <div class="row">
                         <div class="col-md-7">
                             <div class="text">
