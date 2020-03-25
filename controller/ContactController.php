@@ -29,10 +29,9 @@ class ContactController
     {
         if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['message'])) {
 
-            $this->contact->setName($_POST['name']);
-            $this->contact->setEmail($_POST['email']);
-            $this->contact->setMessage($_POST['message']);
-//            var_dump($this->contact);
+            $this->contact->setName(htmlspecialchars($_POST['name']));
+            $this->contact->setEmail(htmlspecialchars($_POST['email']));
+            $this->contact->setMessage(htmlspecialchars($_POST['message']));
             $this->contactManager->createMessage($this->contact);
             $this->msg = "Thank You !";
             require 'view/contactView.php';
@@ -41,14 +40,4 @@ class ContactController
             require 'view/contactView.php';
         }
     }
-
-
-
-    // public function readMessage()
-    // {
-    //     $contactManager = new ContactManager();
-    //     $messages = $contactManager->getMessages();
-    //     var_dump($messages);
-    //     header('Location: index.php?action=addMessage');
-    // }
 }

@@ -26,13 +26,5 @@ class ContactManager extends Manager
         ]);
         return $req;
     }
-
-
-    // public function getMessages()
-    // {
-    //     $db = $this->dbConnect();
-    //     $messages = $db->prepare('SELECT id, name, email, message, DATE_FORMAT(date, \'%d/%m/%Y à %Hh%imin%ss\') AS contact_date FROM contact WHERE id = ? ORDER BY date DESC');
-
-    //     return $messages;
-    // }
+    
 }

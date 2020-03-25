@@ -9,7 +9,6 @@ use PDO;
 
 class UserManager extends Manager
 {
-    // Matching username and password
     public function getAuth($name)
     {
         $db = $this->dbConnect();

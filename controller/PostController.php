@@ -14,18 +14,15 @@ class PostController
     public $msg = "";
     public $p = "";
     public $comment_err = "";
+    public $info = "";
     private $postManager;
     private $commentManager;
     private $post;
-
-//    private $userManager;
-
 
     public function __construct()
     {
         $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
-//        $this->userManager = new UserManager();
         $this->post = new Post();
     }
 
@@ -43,7 +40,6 @@ class PostController
     public function loginListPosts()
     {
         $posts = $this->postManager->getPosts();
-//        $user = $this->userManager->getAuth($_POST['username']);
         $this->msg = 'Welcome';
         $this->p = $_SESSION['username'];
         require 'view/listPostsView.php';
@@ -56,10 +52,12 @@ class PostController
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             $post = $this->postManager->getPost($_GET['id']);
             $comments = $this->commentManager->getComments($_GET['id']);
-            $nbComments = $this->commentManager->getNbComments($_GET['id']);
             $this->p = '';
+            $this->info = 'You need to be login to leave a comment';
         } else {
-            throw new \Exception('Aucun identifiant de billet envoyé');
+            $this->p = 'This post was not found';
+            require 'view/errorView.php';
+            exit;
         }
 
         require 'view/postView.php';

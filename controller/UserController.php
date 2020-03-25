@@ -95,7 +95,7 @@ class UserController
                 return;
             } else {
                 $hash_pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                $this->user->setUsername($_POST['username']);
+                $this->user->setUsername(htmlspecialchars($_POST['username']));
                 $this->user->setPassword($hash_pwd);
                 $this->userManager->addUser($this->user);
 
@@ -140,13 +140,13 @@ class UserController
             } else {
                 $_SESSION['user_id'] = $user['id'];
                 if ($user['role'] === 'admin') {
-                    var_dump($user['role']);
                     $this->role = 'admin';
                     $this->msg = 'Hello Admin';
                     $_SESSION['username'] = $username;
                     $_SESSION['role'] = 'admin';
                     header('Location: index.php?action=showAdminPanel');
                 } elseif ($user['role'] === 'user') {
+//                    var_dump($_SESSION['user_id']);
                     $posts = $this->postManager->getPosts();
                     $this->role = 'user';
                     $this->msg = "Welcome";
@@ -179,5 +179,11 @@ class UserController
         // Redirect to login page
         require 'view/listPostsView.php';
         exit;
+    }
+
+    public function error()
+    {
+        $this->p = 'You\'re not admin';
+        require 'view/errorView.php';
     }
 }

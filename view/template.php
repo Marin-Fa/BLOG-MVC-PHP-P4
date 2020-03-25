@@ -104,8 +104,6 @@
 <script src="public/js/aos.js"></script>
 <script src="public/js/jquery.animateNumber.min.js"></script>
 <script src="public/js/scrollax.min.js"></script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-<!-- <script src="public/js/google-map.js"></script> -->
 <script src="public/js/main.js"></script>
 <script src="public/js/contact.js"></script>
 </body>

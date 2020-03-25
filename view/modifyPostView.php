@@ -1,7 +1,5 @@
 <?php $title = 'Modify a post'; ?>
-
 <?php ob_start(); ?>
-
     <div class="hero-wrap js-fullheight" style="background-image: url('public/images/alaska-4.jpg');"
          data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -25,7 +23,6 @@
             </div>
         </div>
     </div>
-
     <section class="ftco-section ftco-degree-bg">
         <div class="container">
             <div class="row">
@@ -51,7 +48,5 @@
             </div>
         </div>
     </section>
-
 <?php $content = ob_get_clean(); ?>
-
 <?php require('view/template.php'); ?>

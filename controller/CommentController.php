@@ -6,7 +6,6 @@ use Blog\model\{
     CommentManager,
     Comment,
     PostManager,
-    User,
     UserManager
 };
 
@@ -14,6 +13,7 @@ class CommentController
 {
     public $msg = "";
     public $p = "";
+    public $info = "";
     public $comment_err = "";
     private $commentManager;
     private $postManager;
@@ -33,17 +33,18 @@ class CommentController
         if (isset($_POST['submit'])) {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                    $this->comment_err = '';
                     $this->comment->setPostId($postId);
                     $this->comment->setAuthor($_POST['author']);
-                    $this->comment->setComment($_POST['comment']);
+                    $this->comment->setComment(htmlspecialchars($_POST['comment']));
                     $this->comment->setIdUser((int)$_SESSION['user_id']);
                     var_dump($this->comment);
                     $comments = $this->commentManager->createComment($this->comment);
                     header('Location: index.php?action=post&id=' . $postId);
                 } else {
+                    $this->comment_err = "Please, enter a comment !";
                     $post = $this->postManager->getPost($_GET['id']);
                     $comments = $this->commentManager->getComments($_GET['id']);
-                    $this->comment_err = "You must fill in the form";
                     require 'view/postView.php';
                 }
             }
@@ -56,7 +57,6 @@ class CommentController
             $this->commentManager->getComment($_GET['id']);
             $this->commentManager->updateStatusComment($_GET['id']);
             $this->p = 'Comment reported';
-//            var_dump($_GET);
             header('Location: index.php?action=post&id=' . $_GET['postId']);
         } else {
             $this->p = 'You are not logged in';

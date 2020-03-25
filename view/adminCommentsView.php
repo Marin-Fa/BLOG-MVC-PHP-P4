@@ -32,7 +32,6 @@
             <h3>Manage Posts</h3>
             <a href="index.php?action=showAdminPanel" class="btn btn-primary">Manage posts</a>
             <a href="index.php?action=createPostView" class="btn btn-primary">Create a post</a>
-            <a href="index.php?action=errorView" class="btn btn-primary">Test Display Error view</a>
         </div>
     </div>
 

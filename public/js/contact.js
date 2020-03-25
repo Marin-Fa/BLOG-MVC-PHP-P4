@@ -1,5 +1,6 @@
 function changeContactMessage() {
-  $("#contact_header").innerHTML = "Thank You!";
-  //   e.preventDefault();
+    $("#contact_header").innerHTML = "Thank You!";
+    //   e.preventDefault();
 }
-console.log($("#contact_header"));
+
+// console.log($("#contact_header"));
