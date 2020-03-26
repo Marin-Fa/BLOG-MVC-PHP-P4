@@ -91,9 +91,9 @@
     </div>
 </footer>
 <!-- END footer -->
-
 <script src="public/js/jquery.min.js"></script>
 <script src="public/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="public/js/scroll.js"></script>
 <script src="public/js/popper.min.js"></script>
 <script src="public/js/bootstrap.min.js"></script>
 <script src="public/js/jquery.easing.1.3.js"></script>
@@ -105,7 +105,6 @@
 <script src="public/js/jquery.animateNumber.min.js"></script>
 <script src="public/js/scrollax.min.js"></script>
 <script src="public/js/main.js"></script>
-<script src="public/js/contact.js"></script>
 </body>
 
 </html>

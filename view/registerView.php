@@ -15,9 +15,7 @@
                         <div class="col-md-7">
                             <div class="text">
                                 <div class="mouse">
-                                    <a href="#" class="mouse-icon">
-                                        <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
-                                    </a>
+                                    <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -27,7 +25,7 @@
         </div>
     </div>
 
-    <section class="ftco-section contact-section">
+    <section id="section" class="ftco-section contact-section">
         <div class="container col-md-4">
             <p>Please fill this form to create an account.</p>
             <form action="index.php?action=addNewUser" method="post" class="bg-light p-4 p-md-5 contact-form">

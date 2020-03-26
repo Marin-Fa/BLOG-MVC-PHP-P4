@@ -14,9 +14,7 @@
                     <div class="col-md-7">
                         <div class="text">
                             <div class="mouse">
-                                <a href="#" class="mouse-icon">
-                                    <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
-                                </a>
+                                <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
                             </div>
                         </div>
                     </div>
@@ -26,7 +24,7 @@
     </div>
 </div>
 
-<div class="container">
+<div id="section" class="container">
     <div class="row header-dashboard py-5">
         <div class="col-md-12 text-center">
             <h3>Manage Posts</h3>

@@ -88,6 +88,9 @@ if (isset($_GET['action'])) {
                 $comment = new CommentController();
                 $comment->supComment();
             }
+        } else {
+            $view = new UserController();
+            $view->error();
         }
     } else {
         $view = new UserController();

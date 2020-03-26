@@ -15,9 +15,7 @@
                     <div class="col-md-7">
                         <div class="text">
                             <div class="mouse">
-                                <a href="#" class="mouse-icon">
-                                    <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
-                                </a>
+                                <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
                             </div>
                         </div>
                     </div>

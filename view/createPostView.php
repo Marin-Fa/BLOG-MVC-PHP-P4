@@ -14,9 +14,7 @@
                         <div class="col-md-7">
                             <div class="text">
                                 <div class="mouse">
-                                    <a href="#" class="mouse-icon">
-                                        <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
-                                    </a>
+                                    <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -26,7 +24,7 @@
         </div>
     </div>
 
-    <section class="ftco-section ftco-degree-bg">
+    <section id="section" class="ftco-section ftco-degree-bg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 ftco-animate">
