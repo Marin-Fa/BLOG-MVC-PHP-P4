@@ -32,7 +32,7 @@
 <?php
 while ($data = $posts->fetch()) {
     ?>
-    <section id="section" class="ftco-section">
+    <section class="ftco-section scroll-to">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

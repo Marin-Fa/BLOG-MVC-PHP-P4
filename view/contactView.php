@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <section id="section" class="ftco-section contact-section">
+    <section class="ftco-section scroll-to">
         <div class="container">
             <div class="col-md-12 text-center">
                 <form action="index.php?action=addMessage" method="post" class="bg-light p-4 p-md-5 contact-form">
@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email" type="hidden"></label>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="Your Email">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Your Email">
                     </div>
                     <div class="form-group">
                         <label for="message" type="hidden"></label>

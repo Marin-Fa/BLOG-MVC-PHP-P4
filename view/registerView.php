@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <section id="section" class="ftco-section contact-section">
+    <section class="ftco-section scroll-to">
         <div class="container col-md-4">
             <p>Please fill this form to create an account.</p>
             <form action="index.php?action=addNewUser" method="post" class="bg-light p-4 p-md-5 contact-form">

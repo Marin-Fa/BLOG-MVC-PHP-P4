@@ -79,18 +79,15 @@ class PostController
     public function sendPost()
     {
         if (!empty($_POST['title']) && !empty($_POST['content']) && strlen(trim($_POST['title']))) {
-
             $this->post->setTitle($_POST['title']);
             $this->post->setContent($_POST['content']);
-//            var_dump($this->post);
             $this->postManager->createPost($this->post);
-            if ($this->postManager === false) {
-                $this->msg = 'Cannot add post';
-                require 'view/createPostView.php';
-            } else {
-                $this->msg = 'Post added !';
-                header('Location: index.php?action=showAdminPanel');
-            }
+            $this->msg = 'Post added !';
+            $comments = $this->commentManager->getNbCommentAdmin();
+            require 'view/adminView.php';
+        } else {
+            $this->msg = 'Cannot add post';
+            require 'view/createPostView.php';
         }
     }
 
@@ -100,8 +97,9 @@ class PostController
         if (htmlentities(isset($_GET['id']))) {
             $posts = $this->postManager->getPosts();
             $this->postManager->deletePost($_GET['id']);
-            $this->msg = 'Post has been deleted';
-            header('Location: index.php?action=showAdminPanel');
+            $this->msg = 'Post deleted';
+            $comments = $this->commentManager->getNbCommentAdmin();
+            require 'view/adminView.php';
         }
     }
 
@@ -109,12 +107,12 @@ class PostController
     public function modifyPost()
     {
         if (!empty($_POST['title']) && !empty($_POST['content'])) {
-
             $post = $this->postManager->updatePost($_POST['title'], $_POST['content'], $_GET['id']);
             $this->msg = 'Post Updated';
             $comments = $this->commentManager->getNbCommentAdmin();
             require 'view/adminView.php';
         } else {
+            $post = $this->postManager->getPost($_GET['id']);
             $this->msg = 'Something went wrong';
             require 'view/modifyPostView.php';
         }

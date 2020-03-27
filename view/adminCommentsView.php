@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<div id="section" class="container">
+<div class="container  scroll-to">
     <div class="row header-dashboard py-5">
         <div class="col-md-12 text-center">
             <h3>Manage Posts</h3>

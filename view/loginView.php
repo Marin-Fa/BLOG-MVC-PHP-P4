@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <section id="section" class="ftco-section contact-section">
+    <section class="ftco-section scroll-to">
         <div class="container col-md-4">
             <p>Please fill in your credentials to login.</p>
             <form action="index.php?action=welcome" method="post" class="bg-light p-4 p-md-5 contact-form">

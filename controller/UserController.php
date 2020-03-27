@@ -38,6 +38,7 @@ class UserController
     public function showAdminPanel()
     {
         $this->msg = 'Hello Admin';
+        $this->p = '';
         $comments = $this->commentManager->getNbCommentAdmin();
 
         require 'view/adminView.php';
@@ -45,7 +46,7 @@ class UserController
 
     public function showAdminCommentsView()
     {
-        $this->msg = 'Manage Reported Comments';
+        $this->msg = 'Reported Comments';
         $comments = $this->commentManager->getAdminComments();
 
         require 'view/adminCommentsView.php';
@@ -82,7 +83,7 @@ class UserController
                 require 'view/registerView.php';
                 return;
             }
-            if (strlen(trim($_POST["password"])) < 6 && trim($_POST["confirm_password"]) < 6) {
+            if (strlen(trim($_POST["password"])) < 6 && strlen(trim($_POST["confirm_password"])) < 6) {
                 $this->msg = "Register";
                 $this->password_err = "Password must have atleast 6 characters.";
                 require 'view/registerView.php';

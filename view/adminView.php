@@ -10,6 +10,9 @@
                  data-scrollax-parent="true">
                 <div class="col-md-12 ftco-animate">
                     <h2 class="mb-4 mb-md-0"><?= $this->msg ?></h2>
+                    <?php if ($this->p) : ?>
+                        <p><?= $this->p ?></p>
+                    <?php endif ?>
                     <div class="row">
                         <div class="col-md-7">
                             <div class="text">
@@ -24,7 +27,7 @@
         </div>
     </div>
 
-    <div id="section" class="container">
+    <div class="container scroll-to">
         <div class="row header-dashboard py-5">
             <div class="col-md-12 text-center">
                 <h3>Manage Posts</h3>

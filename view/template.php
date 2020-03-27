@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8"/>
-    <title><?= $title ?></title>
+    <title><?= htmlspecialchars($title) ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="description" content="Jean Forteroche's blog">
+    <meta name="author" content="Jean Forteroche">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <!-- Tiny -->
     <script src="https://cdn.tiny.cloud/1/srhkiqvonn5wda7a0350imoal8zs3grvln3eetetzvo3ktnb/tinymce/5/tinymce.min.js"
@@ -16,21 +16,18 @@
             selector: '#adminform'
         });
     </script>
-
+    <!-- Libraries -->
     <link rel="stylesheet" href="public/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="public/css/animate.css">
-
     <link rel="stylesheet" href="public/css/owl.carousel.min.css">
     <link rel="stylesheet" href="public/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="public/css/magnific-popup.css">
-
     <link rel="stylesheet" href="public/css/aos.css">
-
     <link rel="stylesheet" href="public/css/ionicons.min.css">
-
     <link rel="stylesheet" href="public/css/flaticon.css">
     <link rel="stylesheet" href="public/css/icomoon.css">
     <link rel="stylesheet" href="public/css/style.css">
+    <link rel="icon" type="image/png" sizes="50x50" href="public/images/favicon.png">
 </head>
 
 <body>
@@ -47,7 +44,7 @@
                 <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="index.php?action=showContactPage" class="nav-link">Contact</a></li>
                 <?php if (!isset ($_SESSION['username'])) { ?>
-                    <li class="nav-item"><a href="index.php?action=showRegisterPage" class="nav-link">Login</a></li>
+                    <li class="nav-item"><a href="index.php?action=showLoginPage" class="nav-link">Login</a></li>
                 <?php } else { ?>
                     <li class="nav-item"><a href="index.php?action=logOut" class="nav-link">Logout</a></li>
                     <?php if ($_SESSION['role'] === 'admin') { ?>
@@ -86,6 +83,7 @@
                     </script>
                     All rights reserved by Jean Forteroche
                 </p>
+                <p>Student Project</p>
             </div>
         </div>
     </div>

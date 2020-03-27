@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <section id="section" class="ftco-section ftco-degree-bg">
+    <section class="ftco-section scroll-to">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 ftco-animate">
