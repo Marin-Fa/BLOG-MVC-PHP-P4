@@ -48,7 +48,7 @@ while ($data = $posts->fetch()) {
                                         <a href="index.php?action=post&amp;id=<?= $data['id'] ?>"><?= htmlspecialchars($data['title']) ?></a>
                                     </h2>
                                     <p>
-                                        <?= substr(nl2br(htmlspecialchars($data['content'])), 0, 150) ?>
+                                        <?= substr(nl2br($data['content']), 0, 150) ?>
                                         <br/>
                                         <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Comments</a></em>
                                     </p>

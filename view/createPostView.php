@@ -32,11 +32,11 @@
                         <div class="form-group">
                             <label for="title">Title</label><br/>
                             <input type="text" name="title" id="title" cols="30" rows="10"
-                                   class="form-control">
+                                   class="form-control adminform">
                         </div>
                         <div class="form-group">
                             <label for="content">Content</label><br/>
-                            <textarea type="text" name="content" id="content" cols="160" rows="30" id="adminform"
+                            <textarea type="text" name="content" class="adminform" cols="160" rows="30" id="adminform"
                                       class="form-control"></textarea>
                         </div>
                         <div class="form-group">

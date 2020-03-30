@@ -13,7 +13,7 @@
             referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-            selector: '#adminform'
+            selector: '.adminform',
         });
     </script>
     <!-- Libraries -->

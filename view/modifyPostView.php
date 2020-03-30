@@ -30,11 +30,11 @@
                         <div class="form-group">
                             <label for="title">Title</label><br/>
                             <input type="text" name="title" id="title" cols="30" rows="10"
-                                   class="form-control" value="<?= $post['title'] ?>">
+                                   class="form-control adminform" value="<?= $post['title'] ?>">
                         </div>
                         <div class="form-group">
-                            <label for="adminform">Content</label><br/>
-                            <textarea type="text" name="content" id="adminform" cols="160" rows="30"
+                            <label for="content">Content</label><br/>
+                            <textarea type="text" name="content" class="adminform" cols="160" rows="30"
                                       class="form-control"><?= $post['content'] ?></textarea>
                         </div>
                         <div class="form-group">
@@ -47,4 +47,5 @@
         </div>
     </section>
 <?php $content = ob_get_clean(); ?>
+
 <?php require('view/template.php'); ?>
