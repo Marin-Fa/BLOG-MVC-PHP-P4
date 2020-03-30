@@ -9,6 +9,9 @@ use PDO;
 
 class UserManager extends Manager
 {
+    /**
+     * Check if the username allready exists
+     */
     public function getAuth($name)
     {
         $db = $this->dbConnect();
@@ -16,8 +19,10 @@ class UserManager extends Manager
         $req->execute([$name]);
         return $req->fetch();
     }
-
-    // Insert a new user with role = user
+    /**
+     * Create a new user
+     * Role user
+     */
     public function addUser(User $user)
     {
         $db = $this->dbConnect();
@@ -28,5 +33,4 @@ class UserManager extends Manager
         ]);
         return $req;
     }
-
 }

@@ -19,12 +19,16 @@ class ContactController
         $this->contactManager = new ContactManager();
         $this->contact = new Contact();
     }
-
+    /**
+     * Display contactView
+     */
     public function showContactPage()
     {
         require 'view/contactView.php';
     }
-
+    /**
+     * Send a message
+     */
     public function addMessage()
     {
         if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['message'])) {

@@ -6,7 +6,9 @@ use Blog\model\Contact;
 
 class ContactManager extends Manager
 {
-
+    /**
+     * Function to send a message
+     */
     public function createMessage(Contact $contact)
     {
         $db = $this->dbConnect();
@@ -18,5 +20,4 @@ class ContactManager extends Manager
         ]);
         return $req;
     }
-
 }

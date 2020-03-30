@@ -34,7 +34,9 @@ class UserController
         $this->userManager = new UserManager();
         $this->user = new User();
     }
-
+    /**
+     * Display the admin panel
+     */
     public function showAdminPanel()
     {
         $this->msg = 'Hello Admin';
@@ -43,7 +45,9 @@ class UserController
 
         require 'view/adminView.php';
     }
-
+    /**
+     * Display adminCommentsView
+     */
     public function showAdminCommentsView()
     {
         $this->msg = 'Reported Comments';
@@ -51,13 +55,17 @@ class UserController
 
         require 'view/adminCommentsView.php';
     }
-
+    /**
+     * Display registerView
+     */
     public function showRegisterPage()
     {
         $this->msg = "Register";
         require 'view/registerView.php';
     }
-
+    /**
+     * Create an account
+     */
     public function addNewUser($username, $password)
     {
         $this->username = $username;
@@ -105,13 +113,17 @@ class UserController
             }
         }
     }
-
+    /**
+     * Display loginView
+     */
     public function showLoginPage()
     {
         $this->msg = "...Login";
         require 'view/loginView.php';
     }
-
+    /**
+     * Sign in function
+     */
     public function welcome($username, $password)
     {
         if (isset($_POST['submit'])) {
@@ -147,7 +159,7 @@ class UserController
                     $_SESSION['role'] = 'admin';
                     header('Location: index.php?action=showAdminPanel');
                 } elseif ($user['role'] === 'user') {
-//                    var_dump($_SESSION['user_id']);
+                    //                    var_dump($_SESSION['user_id']);
                     $posts = $this->postManager->getPosts();
                     $this->role = 'user';
                     $this->msg = "Welcome";
@@ -166,9 +178,10 @@ class UserController
             }
         }
     }
-
-    public
-    function logOut()
+    /**
+     * Disconnect funcion
+     */
+    public function logOut()
     {
         $posts = $this->postManager->getPosts();
         $this->msg = "See Ya";
@@ -181,7 +194,9 @@ class UserController
         require 'view/listPostsView.php';
         exit;
     }
-
+    /**
+     * Display errorView
+     */
     public function error()
     {
         $this->p = 'You\'re not admin';

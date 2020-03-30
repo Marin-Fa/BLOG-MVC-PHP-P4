@@ -6,15 +6,18 @@ use Blog\model\Post;
 
 class PostManager extends Manager
 {
-    // SELECT all posts
+    /**
+     * Get all posts
+     */
     public function getPosts()
     {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 10');
         return $req;
     }
-
-    // SELECT one post
+    /**
+     * Get one specific post
+     */
     public function getPost($postId)
     {
         $db = $this->dbConnect();
@@ -23,7 +26,9 @@ class PostManager extends Manager
         $post = $req->fetch();
         return $post;
     }
-
+    /**
+     * Create a a post
+     */
     public function createPost(Post $post)
     {
         $db = $this->dbConnect();
@@ -35,16 +40,18 @@ class PostManager extends Manager
         ]);
         return $req;
     }
-
-    // UPDATE a post
+    /**
+     * Update a post
+     */
     public function updatePost($title, $content, $postId)
     {
         $db = $this->dbConnect();
         $updatePost = $db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
         $updatePost->execute([$title, $content, $postId]);
     }
-
-    // DELETE a post
+    /**
+     * Delete a post
+     */
     public function deletePost($postId)
     {
         $db = $this->dbConnect();

@@ -27,7 +27,9 @@ class CommentController
         $this->userManager = new UserManager();
         $this->comment = new Comment();
     }
-
+    /**
+     * Add a comment to a post when a user is connected
+     */
     public function addComment($postId)
     {
         if (isset($_POST['submit'])) {
@@ -37,7 +39,7 @@ class CommentController
                     $this->comment->setPostId($postId);
                     $this->comment->setAuthor($_POST['author']);
                     $this->comment->setComment(htmlspecialchars($_POST['comment']));
-                    $this->comment->setIdUser((int)$_SESSION['user_id']);
+                    $this->comment->setIdUser((int) $_SESSION['user_id']);
                     $comments = $this->commentManager->createComment($this->comment);
                     header('Location: index.php?action=post&id=' . $postId);
                 } else {
@@ -49,7 +51,9 @@ class CommentController
             }
         }
     }
-
+    /**
+     * Report a comment when a user is logged in
+     */
     public function reportComment()
     {
         if ($_SESSION) {
@@ -62,7 +66,9 @@ class CommentController
             require 'view/errorView.php';
         }
     }
-
+    /**
+     * Delete a reported comment 
+     */
     public function supComment()
     {
         $comments = $this->commentManager->getAdminComments();

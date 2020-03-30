@@ -25,9 +25,9 @@ class PostController
         $this->commentManager = new CommentManager();
         $this->post = new Post();
     }
-
-
-    // Display all posts
+    /**
+     * Display all posts on the front page
+     */
     public function listPosts()
     {
         $posts = $this->postManager->getPosts();
@@ -36,17 +36,19 @@ class PostController
 
         require 'view/listPostsView.php';
     }
-
+    /**
+     * Display a welcoming message if a SESSION is created
+     */
     public function loginListPosts()
     {
         $posts = $this->postManager->getPosts();
         $this->msg = 'Welcome';
         $this->p = $_SESSION['username'];
         require 'view/listPostsView.php';
-
     }
-
-    // Display one posts with it's comments
+    /**
+     * Display one post with its comments
+     */
     public function post()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -62,20 +64,26 @@ class PostController
 
         require 'view/postView.php';
     }
-
+    /**
+     * Display createPostView
+     */
     public function createPostView()
     {
         $this->msg = 'Create a Post';
         require 'view/createPostView.php';
     }
-
+    /**
+     * Display modifyPostview
+     */
     public function modifyPostView()
     {
         $this->msg = 'Modify a Post';
         $post = $this->postManager->getPost($_GET['id']);
         require 'view/modifyPostView.php';
     }
-
+    /**
+     * Create a new post
+     */
     public function sendPost()
     {
         if (!empty($_POST['title']) && !empty($_POST['content']) && strlen(trim($_POST['title']))) {
@@ -90,8 +98,9 @@ class PostController
             require 'view/createPostView.php';
         }
     }
-
-    // Delete a post
+    /**
+     * Delete a post with its comments
+     */
     public function deletePost()
     {
         if (htmlentities(isset($_GET['id']))) {
@@ -102,8 +111,9 @@ class PostController
             require 'view/adminView.php';
         }
     }
-
-    // Update post
+    /**
+     * Update a post (title and content)
+     */
     public function modifyPost()
     {
         if (!empty($_POST['title']) && !empty($_POST['content'])) {
@@ -117,11 +127,12 @@ class PostController
             require 'view/modifyPostView.php';
         }
     }
-
+    /**
+     * Display errorView
+     */
     public function errorView()
     {
         $this->msg = 'Error';
         require 'view/errorView.php';
     }
-
 }

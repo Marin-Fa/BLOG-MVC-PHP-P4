@@ -44,7 +44,7 @@
                                 <div class="comment-body">
                                     <h3><?= htmlspecialchars($comment['author']) ?></h3>
                                     <div class="meta mb-3"><?= $comment['comment_date_fr'] ?></div>
-                                    <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                                    <p><?= htmlentities($comment['comment']) ?></p>
                                     <div class="form-group">
                                         <a href="index.php?action=reportComment&amp;id=<?= $comment['id'] ?>&amp;postId=<?= $comment['post_id'] ?>"
                                            class="btn btn-primary">Report</a>

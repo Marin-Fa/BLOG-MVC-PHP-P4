@@ -8,6 +8,9 @@ use PDO;
 
 class CommentManager extends Manager
 {
+    /**
+     * Get all comments on a post
+     */
     public function getComments($postId)
     {
         $db = $this->dbConnect();
@@ -15,15 +18,18 @@ class CommentManager extends Manager
         $comments->execute([$postId]);
         return $comments;
     }
-
+    /**
+     * Get all reported comments
+     */
     public function getAdminComments()
     {
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, author, comment, status, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr, post_id FROM comments WHERE status = 1 ORDER BY comment_date DESC');
         return $req;
     }
-
-    // Add comment
+    /**
+     * Create a comment on a post
+     */
     public function createComment(Comment $comment)
     {
         $db = $this->dbConnect();
@@ -36,7 +42,9 @@ class CommentManager extends Manager
         ]);
         return $req;
     }
-
+    /**
+     * Get one specific comment
+     */
     public function getComment($postId)
     {
         $db = $this->dbConnect();
@@ -45,7 +53,9 @@ class CommentManager extends Manager
         $req->fetch();
         return $req;
     }
-
+    /**
+     * Count nb comments on a post
+     */
     public function getNbComments($postId)
     {
         $db = $this->dbConnect();
@@ -54,7 +64,9 @@ class CommentManager extends Manager
         $nbComments = $comments->fetch();
         return $nbComments;
     }
-
+    /**
+     * Create a comment on a post
+     */
     public function getNbCommentAdmin()
     {
         $db = $this->dbConnect();
@@ -64,7 +76,9 @@ class CommentManager extends Manager
                             GROUP BY posts.id');
         return $req;
     }
-
+    /**
+     * Function to report a comment
+     */
     public function updateStatusComment($commentId)
     {
 
@@ -73,7 +87,9 @@ class CommentManager extends Manager
         $req->execute([$commentId]);
         return $req;
     }
-
+    /**
+     * Delete a comment
+     */
     public function deleteComment($commentId)
     {
         $db = $this->dbConnect();
